@@ -1,0 +1,15 @@
+---
+layout: post
+title: Railsway 09 Berlin -- HAML, SASS (and COMPASS)
+---
+
+I visited this talk in order to learn some tricks to improve my HAML usage.
+My personal favourite was the importance of filters. Using filters you can write intended javascript in your views.
+
+{% highlight ruby %}
+-content_for :jquery
+  :javascript
+    function foo(){
+      alert('Blah');
+    }
+{% endhighlight %}

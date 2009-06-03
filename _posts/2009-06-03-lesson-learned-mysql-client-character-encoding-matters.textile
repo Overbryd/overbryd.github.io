@@ -1,0 +1,53 @@
+---
+layout: post
+title: Lesson learned -- MySQL client character encoding matters
+---
+
+During some maintenance work on PaperC, namingly fixing a bug in the search system, I stumbled upon a fatal mistake.
+
+I forgot to set the @encoding: utf8@ flag in the database.yml on the production server.
+
+{% highlight yaml %}
+production:
+  ...
+  encoding: utf8
+{% endhighlight %}
+
+This lead to the fact that all tables were created with @CHARSET=latin1@ due to (mysql)defaults on the production server. But the nature of rails enforces utf8 everywhere. All utf8-encoded data was stored inside latin1 tables. Actually it worked for quite a long time, because saving data and displaying it wasn't buggy at all, because the data itself was utf8 encoded. But the other truth is: (thinking) sphinx connects explicitly via utf8 encoding.
+
+The bug was discovered by expecting an important book with umlauts in the search results. Digging deeper, I've discovered that all search queries with umlauts where buggy. At this time the database stored about 900 mb of data.
+
+**Note to myself: Always check your database configuration for the encoding flag, both in development and production.**
+
+h2. What did I do to rescue the data?
+
+After some research on the web for practical solutions, and some trial and error on the staging database, I've choosen this procedere:
+
+* Set the website into maintenance mode
+* Dump the production database with the following command[1]:
+
+{% highlight bash %}
+$ mysqldump -u root -p --opt --default-character-set=latin1 paperc_production -r paperc_production-latin1.sql
+{% endhighlight %}
+
+* Replace all @CHARSET@ and @NAMES@ instructions to be utf[2]:
+
+{% highlight bash %}
+$ replace "CHARSET=latin1" "CHARSET=utf8" "SET NAMES latin1" "SET NAMES utf8" < paperc_production-latin1.sql > paperc_production-utf8.sql
+{% endhighlight %}
+
+* Try to restore the dump on another database:
+
+{% highlight bash %}
+$ mysql -u root -p paperc_staging < paperc_production-utf8.sql
+{% endhighlight %}
+
+* Connect to the staging server, do a reindex, check the data, pull some samples to see if everything is ok
+* Restore the dump on the production database
+* Do a complete reindex and unset maintenance mode
+
+And, thank science, it worked!
+
+fn1. I've used the @-r@ option to write the data to the disk, because using the unix output pipe @>@ may cause faulty encoding
+
+fn2. Search and replace using a text editor didn't went well on a ~ 900mb file.

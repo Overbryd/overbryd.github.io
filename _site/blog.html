@@ -1,0 +1,413 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Lukas Rieder | Blog</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/960gs.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/syntax.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/default.css" />
+    
+    <script type="text/javascript" src="/javascripts/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.driveby.js"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function() {
+        $('#followme').driveBy({
+          mouseenter: {
+            'opacity': 100
+          },
+          radius: 250
+        }).css('opacity', 0);
+        $('#forkme').driveBy({
+          mouseenter: {
+            'opacity': 100
+          }
+        }).css('opacity', 0);
+      });
+    </script>
+  </head>
+  <body id="body">
+    <div id="header" class="centered">
+      <div id="myhead"></div>
+      <a href="http://github.com/Overbryd" target="_blank" id="forkme">Fork me on Github</a>
+      <div id="birdy">
+        <a href="#" id="followme">Follow me on Twitter</a>
+      </div>
+      <div class="inner-shadow"></div>
+    </div>
+    <div id="background" class="centered clearfix">
+      
+      <div class="container_12 centered clearfix">
+        <div id="content" class="grid_9 clearfix">
+          <div class="top bg"></div>
+          <div class="middle bg clearfix">
+            <div class="inner">
+
+<div class="post">
+  <h1>Lesson learned -- MySQL client character encoding matters</h1>
+  <p>During some maintenance work on PaperC, namingly fixing a bug in the search system, I stumbled upon a fatal mistake.</p>
+<p>I forgot to set the <code>encoding: utf8</code> flag in the database.yml on the production server.</p>
+<div class="highlight"><pre><span class="l-Scalar-Plain">production</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">...</span>
+  <span class="l-Scalar-Plain">encoding</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">utf8</span>
+</pre>
+</div><p>This lead to the fact that all tables were created with <code>CHARSET=latin1</code> due to (mysql)defaults on the production server. But the nature of rails enforces utf8 everywhere. All utf8-encoded data was stored inside latin1 tables. Actually it worked for quite a long time, because saving data and displaying it wasn&#8217;t buggy at all, because the data itself was utf8 encoded. But the other truth is: (thinking) sphinx connects explicitly via utf8 encoding.</p>
+<p>The bug was discovered by expecting an important book with umlauts in the search results. Digging deeper, I&#8217;ve discovered that all search queries with umlauts where buggy. At this time the database stored about 900 mb of data.</p>
+<p><b>Note to myself: Always check your database configuration for the encoding flag, both in development and production.</b></p>
+<h2>What did I do to rescue the data?</h2>
+<p>After some research on the web for practical solutions, and some trial and error on the staging database, I&#8217;ve choosen this procedere:</p>
+<ul>
+	<li>Set the website into maintenance mode</li>
+	<li>Dump the production database with the following command<sup class="footnote"><a href="#fn1">1</a></sup>:</li>
+</ul>
+<div class="highlight"><pre><span class="nv">$ </span>mysqldump -u root -p --opt --default-character-set<span class="o">=</span>latin1 paperc_production -r paperc_production-latin1.sql
+</pre>
+</div><ul>
+	<li>Replace all <code>CHARSET</code> and <code>NAMES</code> instructions to be utf<sup class="footnote"><a href="#fn2">2</a></sup>:</li>
+</ul>
+<div class="highlight"><pre><span class="nv">$ </span>replace <span class="s2">&quot;CHARSET=latin1&quot;</span> <span class="s2">&quot;CHARSET=utf8&quot;</span> <span class="s2">&quot;SET NAMES latin1&quot;</span> <span class="s2">&quot;SET NAMES utf8&quot;</span> &lt; paperc_production-latin1.sql &gt; paperc_production-utf8.sql
+</pre>
+</div><ul>
+	<li>Try to restore the dump on another database:</li>
+</ul>
+<div class="highlight"><pre><span class="nv">$ </span>mysql -u root -p paperc_staging &lt; paperc_production-utf8.sql
+</pre>
+</div><ul>
+	<li>Connect to the staging server, do a reindex, check the data, pull some samples to see if everything is ok</li>
+	<li>Restore the dump on the production database</li>
+	<li>Do a complete reindex and unset maintenance mode</li>
+</ul>
+<p>And, thank science, it worked!</p>
+<p class="footnote" id="fn1"><sup>1</sup> I&#8217;ve used the <code>-r</code> option to write the data to the disk, because using the unix output pipe <code>&gt;</code> may cause faulty encoding</p>
+<p class="footnote" id="fn2"><sup>2</sup> Search and replace using a text editor didn&#8217;t went well on a ~ 900mb file.</p>
+</div>
+<div class="date sidebox">
+  <span class="title">Jun 2009</span>
+  <span class="day">03</span>
+</div>
+<div class="share sidebox">
+  <span class="title">Share</span>
+</div>
+<div class="opinions sidebox">
+  <span class="title">Opinions</span>
+  <span class="count">0</span>
+  <a href="#">add yours</a>
+</div>
+
+<div class="post">
+  <h1>Railsway 09 -- Advanced Javascript for Rails</h1>
+  <p>Monkey Patching Javascript</p>
+<div class="highlight"><pre><span class="c">// patch local objects</span>
+
+<span class="c">// patch a global object</span>
+<span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">size</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="o">;</span><span class="p">}</span>
+</pre>
+</div>
+</div>
+<div class="date sidebox">
+  <span class="title">May 2009</span>
+  <span class="day">27</span>
+</div>
+<div class="share sidebox">
+  <span class="title">Share</span>
+</div>
+<div class="opinions sidebox">
+  <span class="title">Opinions</span>
+  <span class="count">0</span>
+  <a href="#">add yours</a>
+</div>
+
+<div class="post">
+  <h1>Railsway 09 -- Rails performance</h1>
+  <p>Perceptive performance is more important than application performance.</p>
+<ul>
+	<li>Use yslow</li>
+	<li>Use ETags and Last-Modified together</li>
+	<li>Use Expires in situation where it is possible (batch generated pages)</li>
+	<li>Tools: squid-cache.ord, varnish, akamai, Rack-Cache (&lt;- !)</li>
+	<li>When you&#8217;ve used <span class="caps">HTTP</span> caching to it&#8217;s limits, still there is Rails Caching</li>
+	<li>Use Fragment Caching for expensive partials</li>
+	<li>Use Action Caching</li>
+	<li>Use Model Caching (available trough various plugins)</li>
+	<li>Memchached is kind of self healing</li>
+	<li>Cache Generation is very important, even more important is the generation of the cache key (combination of &#8216;name&#8217;, &#8216;unique identifier&#8217;, &#8216;kind of a version number&#8217;)</li>
+</ul>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">handle_etag</span>
+  <span class="n">fresh_when</span> <span class="ss">:etag</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="vi">@user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="vi">@user</span><span class="o">.</span><span class="n">updated_at</span><span class="o">]</span>
+<span class="k">end</span>
+</pre>
+</div><ul>
+	<li>Last-Modified</li>
+</ul>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">handle_last_modified</span>
+  <span class="n">fresh_when</span> <span class="ss">:last_modified</span> <span class="o">=&gt;</span> <span class="n">last_updated_time</span>
+<span class="k">end</span>
+</pre>
+</div>
+</div>
+<div class="date sidebox">
+  <span class="title">May 2009</span>
+  <span class="day">27</span>
+</div>
+<div class="share sidebox">
+  <span class="title">Share</span>
+</div>
+<div class="opinions sidebox">
+  <span class="title">Opinions</span>
+  <span class="count">0</span>
+  <a href="#">add yours</a>
+</div>
+
+<div class="post">
+  <h1>Railsway 09 -- Meta Programming for fun and profit</h1>
+  <p>Speaker: <a href="http://github.com/nealford">Neal Ford</a></p>
+<p>Monkey Patching much nicer, but watch super calls. There&#8217;s also an framework/plugin called <code>chainable</code>.</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Customer</span>
+  <span class="k">def</span> <span class="nf">update</span>
+    <span class="nb">puts</span> <span class="s2">&quot;do stuff&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># crack open Customer again</span>
+<span class="k">class</span> <span class="nc">Customer</span>
+  <span class="n">old_update</span> <span class="o">=</span> 
+  <span class="k">def</span> 
+<span class="nf">end</span>
+</pre>
+</div><p><code>method_added</code> callback lets you define class level keywords like <code>private</code> or <code>protected</code> to control the behaviour of the following method(s).</p>
+</div>
+<div class="date sidebox">
+  <span class="title">May 2009</span>
+  <span class="day">27</span>
+</div>
+<div class="share sidebox">
+  <span class="title">Share</span>
+</div>
+<div class="opinions sidebox">
+  <span class="title">Opinions</span>
+  <span class="count">0</span>
+  <a href="#">add yours</a>
+</div>
+
+<div class="post">
+  <h1>Railsway 09 -- Making Rails 3 a better Ruby citizen</h1>
+  <p>Test</p>
+</div>
+<div class="date sidebox">
+  <span class="title">May 2009</span>
+  <span class="day">27</span>
+</div>
+<div class="share sidebox">
+  <span class="title">Share</span>
+</div>
+<div class="opinions sidebox">
+  <span class="title">Opinions</span>
+  <span class="count">0</span>
+  <a href="#">add yours</a>
+</div>
+
+<div class="post">
+  <h1>Railsway 09 Berlin -- HAML, SASS (and COMPASS)</h1>
+  <p>I visited this talk in order to learn some tricks to improve my <span class="caps">HAML</span> usage.<br />
+My personal favourite was the importance of filters. Using filters you can write intended javascript in your views.</p>
+<div class="highlight"><pre><span class="o">-</span><span class="n">content_for</span> <span class="ss">:jquery</span>
+  <span class="ss">:javascript</span>
+    <span class="n">function</span> <span class="n">foo</span><span class="p">(){</span>
+      <span class="n">alert</span><span class="p">(</span><span class="s1">&#39;Blah&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+</pre>
+</div>
+</div>
+<div class="date sidebox">
+  <span class="title">May 2009</span>
+  <span class="day">26</span>
+</div>
+<div class="share sidebox">
+  <span class="title">Share</span>
+</div>
+<div class="opinions sidebox">
+  <span class="title">Opinions</span>
+  <span class="count">0</span>
+  <a href="#">add yours</a>
+</div>
+
+<div class="post">
+  <h1>Meet mighty-mite, a simple command line interface for mite!</h1>
+  <p>Time tracking has become an important part in every day work. I start trackers, create time entries, add a project. This is usallly done pretty quickly, but it still costs me some browsing that involves many clicks and keystrokes.</p>
+<p>After a while I&#8217;ve discovered the amazing combination of fluid+iPhone user agent+mite. I&#8217;ve been using this for quite a while now and I&#8217;m happy with it.<br />
+But it still wasn&#8217;t the perfect solution for a terminal monkey like me. I still had to tab-switch and do some clicks here and there, practically it means I had to move my right hand away from the keyboard.</p>
+<p>Then there came DynaMite. It promised to integrate mite into Mac <span class="caps">OSX</span>, which it did bombing into the system preferences pane. The good part is, mite is sitting in the upper right corner of your screen, not very far away and the current tracker time is alway in sight. It sure is very well thought and well done. A good product for the &#8216;web 2.0 bohemian&#8217;.<br />
+The (very) bad thing about it is, that it will stop your timers at 0:30 if you don&#8217;t pay 10 &euro; for it. Even worse, I can&#8217;t find any uninstall button.</p>
+<p>Ok, after that there was another week I was chillin with the fluid app. After this week, I got the idea to develop my very own client, a client that doesn&#8217;t stop timers at 0:30 and fits my personal needs.<br />
+This was the day when mighty-mite was born.</p>
+<p>So much for the history. I had some rough nights, hacking around with the mite-rb gem and thinking about auto-completion for bash. After one weekend and two nights of hard work, I got the initial commit pushed to github.</p>
+<h2>Use mite directly from the console</h2>
+<p>This is something I&#8217;ve dreamed of, now the only running applications are TextMate and iTerm. If you are a person, who tends to optimize workflow or just like the console, I think you will love mighty-mite.</p>
+<p>Before mighty-mite I started working like this:</p>
+<ul>
+	<li>Open up Browser or Fluid app</li>
+	<li>Click my way through, till an empty time entry is running</li>
+	<li>Get back to the application you are actually working with</li>
+</ul>
+<p>My day often ended like this:</p>
+<ul>
+	<li>Switch away to the Browser or Fluid app</li>
+	<li>Click, click, click till all timers were stoppend, all notes added</li>
+	<li>Click, click to the reporting page to recap my day</li>
+</ul>
+<p>Now, I can start my day with <code>mite +</code>. And I end it by typing <code>mite + &amp;&amp; mite today</code>.</p>
+<h3>Isn&#8217;t the terminal some ugly high contrast a lot of gibberish text thingy?</h3>
+<p>Yes indeed. But you won&#8217;t care if you use it on a daily dose.</p>
+<p>I have thought about this problem too, because the console doesn&#8217;t have to be <i>that</i> ugly. You will be surprised how easy it is to look at the report from today.<br />
+Every time entry is lined up, shows you only the information you need and underlines the important stuff with a bit of color.<br />
+You will learn soon, that some red <span style="color:red;">0:25</span> indicates a stopped time entry and a yellow <span style="color:orange;">1:70</span> tells you it is running. And of course, you may also want to know about your revenue for the shown report. A <span style="color:green;">dollar green</span> amount will show up at the end of every report.</p>
+<p>Let&#8217;s recap what you&#8217;ve learned:</p>
+<ul>
+	<li>mighty-mite tends to be simple</li>
+	<li>Your eyes already love it, because it highlights the important stuff</li>
+</ul>
+<h3>But what about all this typing? I prefer select boxes, 2 clicks against one line of text to select my project!</h3>
+<p>Hehe, what a surprise &#8211; I had an idea about this argument too.</p>
+<p>I was wandering in the dungeons of bash, thinking of how to slay the &#8216;Overhead Dragon&#8217; in order to gain the epic item &#8216;work life balancer&#8217;. Deep down there, behind me a bloody path of &#8216;1995 documentations&#8217;, I couldn&#8217;t go back any more. I&#8217;ve come to my weapon of choice, the &#8216;Ultimate Bash Autocomplete&#8217;. And brave as I am, I&#8217;ve skilled myself to handle this beast of a weapon. Now there&#8217;s only me and the &#8216;Overhead Dragon&#8217;.<br />
+Continue reading to find out who has won the battle.</p>
+<p>So, you think 2 clicks can defeat the keyboard?</p>
+<p>What about <code>mite [tab]</code>?<br />
+With only one or two keystrokes + 4 keystrokes for &#8216;mite&#8217; plus a stout-hearted <code>[tab]</code> you are able to add a tracker for your project.</p>
+<p>&#8216;hand moves to mouse&#8217; and mouse movement and 2 clicks <b>VS.</b> &#8216;hands on keyboard&#8217; and 6 &#8211; 10 keystrokes (including [tab])</p>
+<p>You decide the most comfortable way for yourself.</p>
+</div>
+<div class="date sidebox">
+  <span class="title">May 2009</span>
+  <span class="day">22</span>
+</div>
+<div class="share sidebox">
+  <span class="title">Share</span>
+</div>
+<div class="opinions sidebox">
+  <span class="title">Opinions</span>
+  <span class="count">0</span>
+  <a href="#">add yours</a>
+</div>
+
+<div class="post">
+  <h1>Migrate (nearly) any encryption system to AuthLogic</h1>
+  <p>In winter 2008 I wrote the alpha version of <a href="http://paperc.de">PaperC</a>, which uses an outdated version of <code>acts_as_authentic</code>. Spring 2009 all the alpha code was thrown away (it was untested, ugly and impotent) and the decision was made to rewrite PaperC from scratch.<br />
+As time goes by and plugins evolve, acts_as_authentic has been replaced by <a href="http://github.com/binarylogic/authlogic">AuthLogic</a>.<br />
+The problem I was facing: In Alpha State we&#8217;ve collected over one thousand users, who all wanted to be in Beta too. We couldn&#8217;t drop one of them. How to migrate the hashed passwords?</p>
+<h2>AuthLogic for the win!</h2>
+<p>AuthLogic was build to replace existing authentication plugins and stay as the dominant plugin for this use case. AuthLogic is so flexible, you can transition from (nearly) any encryption system. By the way AuthLogic can transition from some versions of acts_as_authentic automagically. But I&#8217;ll describe how to transition other combinations of salt/password encryptions.</p>
+<h2>A look inside</h2>
+<p>AuthLogic is <i>very</i> modular, so we can just write our own CryptoProvider class to handle the old encryption method. To accomplish this mission you&#8217;ll need to understand how AuthLogic passes the password/salt combination into a CryptoProvider class.</p>
+<p><i>Note:</i> At the time of writing I was using authlogic 1.4.0</p>
+<p>AuthLogic takes the users password, tries if there is a match using the current encryption method. If it doesn&#8217;t match and you&#8217;ve configured it to transition from another encryption method, it will try to match the password using the old encryption method.</p>
+<p>To do so it calls <code>matches?</code> on a CryptoProvider class with two arguments: the <code>stored password</code> and an array of encryption arguments (salt and password). The array looks like <code>[raw_password, salt]</code>.</p>
+<p>Given, your old encryption stores passwords this way:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">encrypt_password</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
+  <span class="no">Digest</span><span class="o">::</span><span class="no">SHA512</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(</span><span class="s2">&quot;--</span><span class="si">#{</span><span class="n">salt</span><span class="si">}</span><span class="s2">--</span><span class="si">#{</span><span class="n">password</span><span class="si">}</span><span class="s2">--&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre>
+</div><p>You&#8217;ll need to write a simple class that mimiks the class method <code>matches?</code> of an AuthLogic CryptoProvider.<br />
+Mine looks like this:</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">OldApplicationSha512</span>
+  <span class="c1"># AuthLogic Credentials provides the tokens in the following order:</span>
+  <span class="c1">#  [raw_password, salt]</span>
+  <span class="c1"># The old application used &#39;--#{salt}--#{password}--&#39;</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">matches?</span><span class="p">(</span><span class="n">crypted</span><span class="p">,</span> <span class="o">*</span><span class="n">tokens</span><span class="p">)</span>
+    <span class="no">Digest</span><span class="o">::</span><span class="no">SHA512</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(</span><span class="s2">&quot;--</span><span class="si">#{</span><span class="n">tokens</span><span class="o">.</span><span class="n">last</span><span class="si">}</span><span class="s2">--</span><span class="si">#{</span><span class="n">tokens</span><span class="o">.</span><span class="n">first</span><span class="si">}</span><span class="s2">--&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">crypted</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre>
+</div><p>Here&#8217;s how to wire it up in your user model:</p>
+<div class="highlight"><pre><span class="n">acts_as_authentic</span> <span class="ss">:login_field</span> <span class="o">=&gt;</span> <span class="ss">:email</span><span class="p">,</span>
+  <span class="ss">:transition_from_crypto_provider</span> <span class="o">=&gt;</span> <span class="no">OldApplicationSha512</span>
+</pre>
+</div><h3>Job done! But I&#8217;ll leave the writing of tests as an excercise to you&#8230;</h3>
+</div>
+<div class="date sidebox">
+  <span class="title">May 2009</span>
+  <span class="day">13</span>
+</div>
+<div class="share sidebox">
+  <span class="title">Share</span>
+</div>
+<div class="opinions sidebox">
+  <span class="title">Opinions</span>
+  <span class="count">0</span>
+  <a href="#">add yours</a>
+</div>
+
+<div class="post">
+  <h1>How to overcome the group_concat_max_len limitation in mysql to join large text columns in thinking sphinx</h1>
+  <p>Recently I&#8217;ve discovered a strange misbehaviour on a project I&#8217;m working on.<br />
+The setting is, that we use <a href="http://thinking-sphinx.org">Thinking Sphinx</a> to search through our database. The model is a Document that has many pages, and they have a plain_text column which should be searchable &#8211; both via the Page model and the Document model.</p>
+<p>The thinking sphinx declaration looks like (shortened):</p>
+<div class="highlight"><pre><span class="n">define_index</span> <span class="k">do</span>  
+  <span class="c1"># ...</span>
+  <span class="n">indexes</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">:sortable</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+  <span class="n">indexes</span> <span class="ss">:author</span><span class="p">,</span> <span class="ss">:sortable</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+  <span class="n">indexes</span> <span class="n">pages</span><span class="o">.</span><span class="n">plain_text</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:plain_text</span>
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+</pre>
+</div><p>The documents in the database have 300 up to 500 pages in general. And thinking sphinx uses the <code>GROUP_CONCAT()</code><sup class="footnote"><a href="#fn1">1</a></sup> function from mysql to join the columns together. This function is limited to 1024 bytes by default<sup class="footnote"><a href="#fn2">2</a></sup>. That&#8217;s not good for joining the contents of hundreds of pages together.</p>
+<p>This lead to the error that only the first pages of a document were found by thinking sphinx. Although intense testing has been done, the pitfall was, that the testing document only had 4 pages. <i>Note for myself:</i> Always test in real world environments, at least once or twice.</p>
+<h2>The solution</h2>
+<p>Add this to your define index block, in a model where you might need to join huge columns.</p>
+<div class="highlight"><pre><span class="n">define_index</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+  <span class="n">set_property</span> <span class="ss">:group_concat_max_len</span> <span class="o">=&gt;</span> <span class="mi">16</span><span class="o">.</span><span class="n">megabytes</span>
+<span class="k">end</span>
+</pre>
+</div><p>Afterwards you need to reconfigure and reindex your sphinx database.</p>
+<p class="footnote" id="fn1"><sup>1</sup> http://dev.mysql.com/doc/refman/5.0/en/group-by-functions.html#function_group-concat</p>
+<p class="footnote" id="fn2"><sup>2</sup> http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#sysvar_group_concat_max_len</p>
+</div>
+<div class="date sidebox">
+  <span class="title">May 2009</span>
+  <span class="day">13</span>
+</div>
+<div class="share sidebox">
+  <span class="title">Share</span>
+</div>
+<div class="opinions sidebox">
+  <span class="title">Opinions</span>
+  <span class="count">0</span>
+  <a href="#">add yours</a>
+</div>
+
+</div>
+          </div>
+          <div class="bottom bg"></div>
+        </div>
+      
+        <div id="sidebar" class="grid_3">
+          <div class="inner">
+            <div id="aboutme" class="clearfix">
+              <div id="coffeemug"></div>
+              <p class="small">
+                <img src="http://gravatar.com/avatar/171de85d4d79cb7afe725174fb099137.jpg" width="40px" height="40px" alt="My Gravatar" align="left"/>Hy, my name is Lukas Rieder.<br/><br/>
+                You can <a href="contact.html">Contact me here</a>.
+              </p>
+            </div>
+            <div id="manifesto">
+              <h3>Manifesto</h3>
+              <p>I've become a freelancer, because I like to monetize the things I love to do. Freelancing gives me enough responsibility to feel passionate about what I'm doing.
+              </p><p>
+              Human beeings are not made to follow strict day to day routines. Humans don't fit into robot stuff. Their just too weak, too sloppy or too sleepy to do repetive work.
+              For this reason I seek for diversity in what I'm doing.
+              </p><p>
+              I like people who think forward. I feel comfortable in a sort of positive, future like mindset. Not the predictive stuff. That's odd. Much more the "Hey, I like to make my own way" or "I've never heard of 'Gorilla-Sandboarding-Break-A-Leg' but I'll give it a try".
+              </p><p>
+              We will probably never get along if you can't find your own motivation not to sleep all day.
+              </p><p>
+              Work is something that has to be done. Quality and Performance are indicators I'm definitely aware of. But let us talk about the different ways to achieve these goals. I'll listen to your way if you consider mine.
+              </p><p>
+              Solar panels should be everywhere.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          
+    </div>
+  </body>
+</html>

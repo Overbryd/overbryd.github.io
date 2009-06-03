@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>How to overcome the group_concat_max_len limitation in mysql to join large text columns in thinking sphinx</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/960gs.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/syntax.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/default.css" />
+    
+    <script type="text/javascript" src="/javascripts/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.driveby.js"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function() {
+        $('#followme').driveBy({
+          mouseenter: {
+            'opacity': 100
+          },
+          radius: 250
+        }).css('opacity', 0);
+        $('#forkme').driveBy({
+          mouseenter: {
+            'opacity': 100
+          }
+        }).css('opacity', 0);
+      });
+    </script>
+  </head>
+  <body id="body">
+    <div id="header" class="centered">
+      <div id="myhead"></div>
+      <a href="http://github.com/Overbryd" target="_blank" id="forkme">Fork me on Github</a>
+      <div id="birdy">
+        <a href="#" id="followme">Follow me on Twitter</a>
+      </div>
+      <div class="inner-shadow"></div>
+    </div>
+    <div id="background" class="centered clearfix">
+      
+      <div class="container_12 centered clearfix">
+        <div id="content" class="grid_9 clearfix">
+          <div class="top bg"></div>
+          <div class="middle bg clearfix">
+            <div class="inner">
+<div class="post">
+  <h1>How to overcome the group_concat_max_len limitation in mysql to join large text columns in thinking sphinx</h1>
+  <p>Recently I&#8217;ve discovered a strange misbehaviour on a project I&#8217;m working on.<br />
+The setting is, that we use <a href="http://thinking-sphinx.org">Thinking Sphinx</a> to search through our database. The model is a Document that has many pages, and they have a plain_text column which should be searchable &#8211; both via the Page model and the Document model.</p>
+<p>The thinking sphinx declaration looks like (shortened):</p>
+<div class="highlight"><pre><span class="n">define_index</span> <span class="k">do</span>  
+  <span class="c1"># ...</span>
+  <span class="n">indexes</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">:sortable</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+  <span class="n">indexes</span> <span class="ss">:author</span><span class="p">,</span> <span class="ss">:sortable</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+  <span class="n">indexes</span> <span class="n">pages</span><span class="o">.</span><span class="n">plain_text</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:plain_text</span>
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+</pre>
+</div><p>The documents in the database have 300 up to 500 pages in general. And thinking sphinx uses the <code>GROUP_CONCAT()</code><sup class="footnote"><a href="#fn1">1</a></sup> function from mysql to join the columns together. This function is limited to 1024 bytes by default<sup class="footnote"><a href="#fn2">2</a></sup>. That&#8217;s not good for joining the contents of hundreds of pages together.</p>
+<p>This lead to the error that only the first pages of a document were found by thinking sphinx. Although intense testing has been done, the pitfall was, that the testing document only had 4 pages. <i>Note for myself:</i> Always test in real world environments, at least once or twice.</p>
+<h2>The solution</h2>
+<p>Add this to your define index block, in a model where you might need to join huge columns.</p>
+<div class="highlight"><pre><span class="n">define_index</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+  <span class="n">set_property</span> <span class="ss">:group_concat_max_len</span> <span class="o">=&gt;</span> <span class="mi">16</span><span class="o">.</span><span class="n">megabytes</span>
+<span class="k">end</span>
+</pre>
+</div><p>Afterwards you need to reconfigure and reindex your sphinx database.</p>
+<p class="footnote" id="fn1"><sup>1</sup> http://dev.mysql.com/doc/refman/5.0/en/group-by-functions.html#function_group-concat</p>
+<p class="footnote" id="fn2"><sup>2</sup> http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#sysvar_group_concat_max_len</p>
+</div>
+<div class="date sidebox">
+  <span class="title"></span>
+  <span class="day"></span>
+</div>
+<div class="share sidebox">
+  <span class="title">Share</span>
+</div>
+<div class="opinions sidebox">
+  <span class="title">Opinions</span>
+  <span class="count">0</span>
+  <a href="#">add yours</a>
+</div></div>
+          </div>
+          <div class="bottom bg"></div>
+        </div>
+      
+        <div id="sidebar" class="grid_3">
+          <div class="inner">
+            <div id="aboutme" class="clearfix">
+              <div id="coffeemug"></div>
+              <p class="small">
+                <img src="http://gravatar.com/avatar/171de85d4d79cb7afe725174fb099137.jpg" width="40px" height="40px" alt="My Gravatar" align="left"/>Hy, my name is Lukas Rieder.<br/><br/>
+                You can <a href="contact.html">Contact me here</a>.
+              </p>
+            </div>
+            <div id="manifesto">
+              <h3>Manifesto</h3>
+              <p>I've become a freelancer, because I like to monetize the things I love to do. Freelancing gives me enough responsibility to feel passionate about what I'm doing.
+              </p><p>
+              Human beeings are not made to follow strict day to day routines. Humans don't fit into robot stuff. Their just too weak, too sloppy or too sleepy to do repetive work.
+              For this reason I seek for diversity in what I'm doing.
+              </p><p>
+              I like people who think forward. I feel comfortable in a sort of positive, future like mindset. Not the predictive stuff. That's odd. Much more the "Hey, I like to make my own way" or "I've never heard of 'Gorilla-Sandboarding-Break-A-Leg' but I'll give it a try".
+              </p><p>
+              We will probably never get along if you can't find your own motivation not to sleep all day.
+              </p><p>
+              Work is something that has to be done. Quality and Performance are indicators I'm definitely aware of. But let us talk about the different ways to achieve these goals. I'll listen to your way if you consider mine.
+              </p><p>
+              Solar panels should be everywhere.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          
+    </div>
+  </body>
+</html>

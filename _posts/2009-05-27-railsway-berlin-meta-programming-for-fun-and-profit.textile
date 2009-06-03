@@ -1,0 +1,26 @@
+---
+layout: post
+title: Railsway 09 -- Meta Programming for fun and profit
+---
+
+
+Speaker: "Neal Ford":http://github.com/nealford
+
+Monkey Patching much nicer, but watch super calls. There's also an framework/plugin called @chainable@.
+
+{% highlight ruby %}
+class Customer
+  def update
+    puts "do stuff"
+  end
+end
+
+# crack open Customer again
+class Customer
+  old_update = 
+  def 
+end
+{% endhighlight %}
+
+@method_added@ callback lets you define class level keywords like @private@ or @protected@ to control the behaviour of the following method(s).
+

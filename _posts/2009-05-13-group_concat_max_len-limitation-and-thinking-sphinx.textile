@@ -1,0 +1,40 @@
+---
+layout: post
+title: How to overcome the group_concat_max_len limitation in mysql to join large text columns in thinking sphinx
+---
+
+Recently I've discovered a strange misbehaviour on a project I'm working on.
+The setting is, that we use "Thinking Sphinx":http://thinking-sphinx.org to search through our database. The model is a Document that has many pages, and they have a plain_text column which should be searchable - both via the Page model and the Document model.
+
+The thinking sphinx declaration looks like (shortened):
+
+{% highlight ruby %}
+define_index do  
+  # ...
+  indexes :title, :sortable => true
+  indexes :author, :sortable => true
+  indexes pages.plain_text, :as => :plain_text
+  # ...
+end
+{% endhighlight %}
+
+The documents in the database have 300 up to 500 pages in general. And thinking sphinx uses the @GROUP_CONCAT()@[1] function from mysql to join the columns together. This function is limited to 1024 bytes by default[2]. That's not good for joining the contents of hundreds of pages together.
+
+This lead to the error that only the first pages of a document were found by thinking sphinx. Although intense testing has been done, the pitfall was, that the testing document only had 4 pages. __Note for myself:__ Always test in real world environments, at least once or twice.
+
+h2. The solution
+
+Add this to your define index block, in a model where you might need to join huge columns.
+
+{% highlight ruby %}
+define_index do
+  # ...
+  set_property :group_concat_max_len => 16.megabytes
+end
+{% endhighlight %}
+
+Afterwards you need to reconfigure and reindex your sphinx database.
+
+fn1. http://dev.mysql.com/doc/refman/5.0/en/group-by-functions.html#function_group-concat
+
+fn2. http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#sysvar_group_concat_max_len

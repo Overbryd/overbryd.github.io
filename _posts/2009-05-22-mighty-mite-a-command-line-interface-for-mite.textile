@@ -1,0 +1,64 @@
+---
+layout: post
+title: Meet mighty-mite, a simple command line interface for mite!
+---
+
+Time tracking has become an important part in every day work. I start trackers, create time entries, add a project. This is usallly done pretty quickly, but it still costs me some browsing that involves many clicks and keystrokes.
+
+After a while I've discovered the amazing combination of fluid+iPhone user agent+mite. I've been using this for quite a while now and I'm happy with it.
+But it still wasn't the perfect solution for a terminal monkey like me. I still had to tab-switch and do some clicks here and there, practically it means I had to move my right hand away from the keyboard.
+
+Then there came DynaMite. It promised to integrate mite into Mac OSX, which it did bombing into the system preferences pane. The good part is, mite is sitting in the upper right corner of your screen, not very far away and the current tracker time is alway in sight. It sure is very well thought and well done. A good product for the 'web 2.0 bohemian'.
+The (very) bad thing about it is, that it will stop your timers at 0:30 if you don't pay 10 &euro; for it. Even worse, I can't find any uninstall button.
+
+Ok, after that there was another week I was chillin with the fluid app. After this week, I got the idea to develop my very own client, a client that doesn't stop timers at 0:30 and fits my personal needs.
+This was the day when mighty-mite was born.
+
+So much for the history. I had some rough nights, hacking around with the mite-rb gem and thinking about auto-completion for bash. After one weekend and two nights of hard work, I got the initial commit pushed to github.
+
+h2. Use mite directly from the console
+
+This is something I've dreamed of, now the only running applications are TextMate and iTerm. If you are a person, who tends to optimize workflow or just like the console, I think you will love mighty-mite.
+
+Before mighty-mite I started working like this:
+
+* Open up Browser or Fluid app
+* Click my way through, till an empty time entry is running
+* Get back to the application you are actually working with
+
+My day often ended like this:
+
+* Switch away to the Browser or Fluid app
+* Click, click, click till all timers were stoppend, all notes added
+* Click, click to the reporting page to recap my day
+
+Now, I can start my day with @mite +@. And I end it by typing @mite + && mite today@.
+
+h3. Isn't the terminal some ugly high contrast a lot of gibberish text thingy?
+
+Yes indeed. But you won't care if you use it on a daily dose.
+
+I have thought about this problem too, because the console doesn't have to be __that__ ugly. You will be surprised how easy it is to look at the report from today.
+Every time entry is lined up, shows you only the information you need and underlines the important stuff with a bit of color.
+You will learn soon, that some red %{color:red}0:25% indicates a stopped time entry and a yellow %{color:orange}1:70% tells you it is running. And of course, you may also want to know about your revenue for the shown report. A %{color:green}dollar green% amount will show up at the end of every report.
+
+Let's recap what you've learned:
+
+* mighty-mite tends to be simple
+* Your eyes already love it, because it highlights the important stuff
+
+h3. But what about all this typing? I prefer select boxes, 2 clicks against one line of text to select my project!
+
+Hehe, what a surprise - I had an idea about this argument too.
+
+I was wandering in the dungeons of bash, thinking of how to slay the 'Overhead Dragon' in order to gain the epic item 'work life balancer'. Deep down there, behind me a bloody path of '1995 documentations', I couldn't go back any more. I've come to my weapon of choice, the 'Ultimate Bash Autocomplete'. And brave as I am, I've skilled myself to handle this beast of a weapon. Now there's only me and the 'Overhead Dragon'.
+Continue reading to find out who has won the battle.
+
+So, you think 2 clicks can defeat the keyboard?
+
+What about @mite [tab]@?
+With only one or two keystrokes + 4 keystrokes for 'mite' plus a stout-hearted @[tab]@ you are able to add a tracker for your project.
+
+'hand moves to mouse' and mouse movement and 2 clicks **VS.** 'hands on keyboard' and 6 - 10 keystrokes (including [tab])
+
+You decide the most comfortable way for yourself.

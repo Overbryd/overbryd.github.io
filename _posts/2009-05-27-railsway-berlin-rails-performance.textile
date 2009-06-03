@@ -1,0 +1,31 @@
+---
+layout: post
+title: Railsway 09 -- Rails performance
+---
+
+Perceptive performance is more important than application performance.
+
+* Use yslow
+* Use ETags and Last-Modified together
+* Use Expires in situation where it is possible (batch generated pages)
+* Tools: squid-cache.ord, varnish, akamai, Rack-Cache (<- !)
+* When you've used HTTP caching to it's limits, still there is Rails Caching
+* Use Fragment Caching for expensive partials
+* Use Action Caching
+* Use Model Caching (available trough various plugins)
+* Memchached is kind of self healing
+* Cache Generation is very important, even more important is the generation of the cache key (combination of 'name', 'unique identifier', 'kind of a version number')
+
+{% highlight ruby %}
+def handle_etag
+  fresh_when :etag => [@user.id, @user.updated_at]
+end
+{% endhighlight %}
+
+* Last-Modified
+
+{% highlight ruby %}
+def handle_last_modified
+  fresh_when :last_modified => last_updated_time
+end
+{% endhighlight %}

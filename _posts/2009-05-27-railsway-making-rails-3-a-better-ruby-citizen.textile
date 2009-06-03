@@ -1,0 +1,6 @@
+---
+layout: post
+title: Railsway 09 -- Making Rails 3 a better Ruby citizen
+---
+
+Test

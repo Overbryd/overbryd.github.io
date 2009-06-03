@@ -1,1 +1,13 @@
-My GitHub Page
+---
+layout: default
+title: Lukas Rieder
+---
+
+<div class="post">
+  <h1>Recent blog posts</h1>
+  <ul>
+    {% for post in site.posts %}
+      <li><a href="{{ post.url }}">{{ post.title }}</a>
+    {% endfor %}
+  </ul>
+</div>
