@@ -26,6 +26,10 @@ h3 {
   font-weight:bold;
   margin-top:1em;
 }
+hr {
+  border:none;
+  border-bottom:4px solid #e0e0e0;
+}
 p {
   margin:1em 0;
   line-height:1.5em;

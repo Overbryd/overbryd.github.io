@@ -5,11 +5,18 @@ layout: default
 <div class="post">
   <h1>{{ page.title }}</h1>
   {{ content }}
+  <hr/>
+  <div id="disqus_thread">
+    
+  </div>
+  <script type="text/javascript" src="http://disqus.com/forums/lukasrieder/embed.js"></script>
+  <noscript><a href="http://lukasrieder.disqus.com/?url=ref">View the discussion thread.</a></noscript>
 </div>
 <div class="date sidebox">
   <span class="title">{{ page.date | date: "%b %Y" }}</span>
   <span class="day">{{ page.date | date: "%d" }}</span>
 </div>
+<!--
 <div class="share sidebox">
   <span class="title">Share</span>
 </div>
@@ -18,3 +25,4 @@ layout: default
   <span class="count">0</span>
   <a href="#">add yours</a>
 </div>
+-->

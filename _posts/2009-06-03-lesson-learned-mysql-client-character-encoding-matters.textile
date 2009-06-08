@@ -13,17 +13,62 @@ production:
   encoding: utf8
 {% endhighlight %}
 
-This lead to the fact that all tables were created with @CHARSET=latin1@ due to (mysql)defaults on the production server. But the nature of rails enforces utf8 everywhere. All utf8-encoded data was stored inside latin1 tables. Actually it worked for quite a long time, because saving data and displaying it wasn't buggy at all, because the data itself was utf8 encoded. But the other truth is: (thinking) sphinx connects explicitly via utf8 encoding.
+This lead to the fact that all tables were created with @CHARSET=latin1@ due to (mysql)defaults on the production server. But the nature of rails enforces utf8 everywhere, therefore utf8-encoded data was stored inside latin1 tables. Actually it worked for quite a long time, because saving data and displaying it wasn't buggy at all - the data itself was utf8 encoded. But the other truth is: (thinking) sphinx connects explicitly via utf8 encoding.
 
 The bug was discovered by expecting an important book with umlauts in the search results. Digging deeper, I've discovered that all search queries with umlauts where buggy. At this time the database stored about 900 mb of data.
 
 **Note to myself: Always check your database configuration for the encoding flag, both in development and production.**
 
-h2. What did I do to rescue the data?
+h2. As a consequence I've written this little capistrano task to create the correct database.yml during deployment:
+
+Snippet from @config/deploy.rb@:
+__You could hook this to after setup or somehwere there.__
+
+{% highlight ruby %}
+namespace :db do
+  desc "upload the result of config/database.yml.erb to \#{shared_path}/config/database.yml"
+  task :configure, :roles => :db do
+    db_configuration = ERB.new File.read("#{local_root}/config/database.yml.erb")
+    set :db_host, 'localhost'
+    set :db_user, user
+    set :db_password, ask("Type the mysql password on #{db_host} for #{db_user}: ")
+    put db_configuration.result(binding), "#{shared_path}/config/database.yml"
+  end
+end
+{% endhighlight %}
+
+In @config/database.yml.erb@:
+
+{% highlight yaml %}
+common: &common
+  adapter: mysql
+  username: <%= db_user %>
+  password: <%= db_password %>
+  host: <%= db_host %>
+  encoding: utf8
+
+development:
+  <<: *common
+  database: <%= application %>_development
+
+test:
+  <<: *common
+  database: <%= application %>_test
+
+production:
+  <<: *common
+  database: <%= application %>_production
+
+staging:
+  <<: *common
+  database: <%= application %>_staging
+{% endhighlight %}
+
+h2. What did I do to rescue the data from the table encoding mismatch?
 
 After some research on the web for practical solutions, and some trial and error on the staging database, I've choosen this procedere:
 
-* Set the website into maintenance mode
+* Set the website into maintenance mode, stop all background workers
 * Dump the production database with the following command[1]:
 
 {% highlight bash %}
@@ -42,9 +87,9 @@ $ replace "CHARSET=latin1" "CHARSET=utf8" "SET NAMES latin1" "SET NAMES utf8" < 
 $ mysql -u root -p paperc_staging < paperc_production-utf8.sql
 {% endhighlight %}
 
-* Connect to the staging server, do a reindex, check the data, pull some samples to see if everything is ok
+* Connect to the staging server, do a reindex, check the data, pull some samples to see if everything is alright
 * Restore the dump on the production database
-* Do a complete reindex and unset maintenance mode
+* Do a complete reindex, unset maintenance mode and restart background workers
 
 And, thank science, it worked!
 
