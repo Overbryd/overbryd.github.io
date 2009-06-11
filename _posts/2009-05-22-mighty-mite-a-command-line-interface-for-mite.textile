@@ -54,7 +54,7 @@ Hehe, what a surprise - I had an idea about this argument too.
 I was wandering in the dungeons of bash, thinking of how to slay the 'Overhead Dragon' in order to gain the epic item 'work life balancer'. Deep down there, behind me a bloody path of '1995 documentations', I couldn't go back any more. I've come to my weapon of choice, the 'Ultimate Bash Autocomplete'. And brave as I am, I've skilled myself to handle this beast of a weapon. Now there's only me and the 'Overhead Dragon'.
 Continue reading to find out who has won the battle.
 
-So, you think 2 clicks can defeat the keyboard?
+h3. So, you think 2 clicks can defeat the keyboard?
 
 What about @mite [tab]@?
 With only one or two keystrokes + 4 keystrokes for 'mite' plus a stout-hearted @[tab]@ you are able to add a tracker for your project.
@@ -62,3 +62,11 @@ With only one or two keystrokes + 4 keystrokes for 'mite' plus a stout-hearted @
 'hand moves to mouse' and mouse movement and 2 clicks **VS.** 'hands on keyboard' and 6 - 10 keystrokes (including [tab])
 
 You decide the most comfortable way for yourself.
+
+* Choose @mite.cmd@ if you're a console lover, system administrator or life hacker:
+
+{% highlight bash %}
+  $ gem install Overbryd-mite.cmd -s http://gems.github.com
+{% endhighlight %}
+
+* Of course you'll need a mite. account, get one here: "mite.yo.lk":http://mite.yo.lk
