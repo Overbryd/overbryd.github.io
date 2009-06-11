@@ -272,7 +272,7 @@ ul.post_list {
 .post_list .date {
   display:inline-block;
   margin:0 .5em 0 0;
-  color:#ccc;
+  color:#333;
   font-family:Inconsolata, monospace;
 }
 #content .col2 {
