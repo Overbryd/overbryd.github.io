@@ -5,9 +5,9 @@ title: Lukas Rieder
 
 <div class="post">
   <h1>Recent blog posts</h1>
-  <ul>
+  <ul class="post_list">
     {% for post in site.posts %}
-      <li><a href="{{ post.url }}">{{ post.title }}</a>
+      <li><span class="date">{{ post.date | date: "%d %b %Y" }}</span><a href="{{ post.url }}">{{ post.title }}</a>
     {% endfor %}
   </ul>
 </div>

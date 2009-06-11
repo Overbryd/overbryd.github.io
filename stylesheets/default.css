@@ -133,13 +133,19 @@ blockquote {
 img {
   margin:.5em;
 }
+a, a:visited, a:active, a:focus {
+  color:darkblue;
+  
+}
+a:hover {
+  color:#000;
+}
 
 #body {
   background:url(../images/pattern.png);
 }
 
 .centered {
-	margin:0 auto;
 }
 .inner-shadow {
   position:absolute;
@@ -147,10 +153,16 @@ img {
   width:100%; height:10px;
   background:transparent repeat-x url(../images/inner-shadow.png);
 }
-#header {
-	position:relative;
+#header .centered {
+	margin:0 auto;
 	width:1020px; height:280px;
 	background:#608ab2 no-repeat top center url(../images/header-bg.png);
+	position:relative;
+}
+#header {
+  position:relative;
+  height:280px;
+	background:#608ab2 repeat-x url(../images/header-bg2.png);
 }
 #myhead {
 	position:absolute;
@@ -209,6 +221,23 @@ a#forkme:hover {
   width:57px; height:84px;
   background:transparent no-repeat url(../images/coffeemug.png);
 }
+ul.vertical.navigation {
+  list-style:none;
+  padding:0;
+  margin:2em 0;
+}
+ul.vertical.navigation {
+  padding:0; margin:0;
+}
+ul.vertical.navigation li a {
+  display:block;
+  font-size:1.5em;
+  line-height:1.5em;
+  padding:3px 0 3px 8px;
+}
+ul.vertical.navigation li a:hover {
+  background:#ccc;
+}
 #manifesto {
   margin-top:20px;
   color:#3b3b3b;
@@ -232,6 +261,19 @@ a#forkme:hover {
   position:relative;
   width:580px;
   margin:0 20px 20px 0;
+}
+ul.post_list {
+  list-style:square;
+  color:#c0c0c0;
+}
+.post_list li {
+  padding:0; margin:0;
+}
+.post_list .date {
+  display:inline-block;
+  margin:0 .5em 0 0;
+  color:#ccc;
+  font-family:Inconsolata, monospace;
 }
 #content .col2 {
   float:right;
