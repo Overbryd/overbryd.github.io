@@ -1,0 +1,63 @@
+---
+layout: post
+title: Chef getting started
+---
+
+This is my quick start guide to get chef server and chef clients up and running.
+
+h2. Client installation
+
+Install the required software to run @chef-client@.
+
+{% highlight bash %}
+$ aptitude install ruby ruby1.8-dev libopenssl-ruby1.8 rdoc ri irb build-essential wget
+{% endhighlight %}
+
+Install ruby gems:
+
+{% highlight bash %}
+cd /tmp
+wget http://rubyforge.org/frs/download.php/57643/rubygems-1.3.4.tgz
+tar zxvf rubygems-1.3.4.tgz
+cd rubygems-1.3.4
+sudo ruby setup.rb 
+sudo ln -sfv /usr/bin/gem1.8 /usr/bin/gem
+{% endhighlight %}
+
+Add Opscode gem source and Install @chef@ and @ohai@.
+
+{% highlight bash %}
+$ gem sources -a http://gems.opscode.com
+$ gem install ohai chef
+{% endhighlight %}
+
+Setup solo.rb in @~/solo.rb@
+
+{% highlight ruby %}
+file_cache_path "/tmp/chef-solo"
+cookbook_path "/tmp/chef-solo/cookbooks"
+{% endhighlight %}
+
+Setup chef.json in @~/chef.json@
+
+{% highlight javascript %}
+{ "chef": { "server_fqdn": "chef.crimsonbay.de" }, "recipes": "chef::client" }
+{% endhighlight %}
+
+Run that shit
+
+{% highlight bash %}
+$ chef-solo -c ~/solo.rb -j ~/chef.json -r http://s3.amazonaws.com/chef-solo/bootstrap-latest.tar.gz
+{% endhighlight %}
+
+h2. The capistrano script
+
+{% highlight ruby %}
+# Capfile
+namespace :chef do
+  desc "Install chef-client on the given server"
+  task :install do
+    # work in progress
+  end
+end
+{% endhighlight %}

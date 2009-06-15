@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Meet mighty-mite, a simple command line interface for mite!
+title: Meet mite.cmd, a simple command line interface for mite!
 ---
 
 Time tracking has become an important part in every day work. I start trackers, create time entries, add a project. This is usallly done pretty quickly, but it still costs me some browsing that involves many clicks and keystrokes.
@@ -12,15 +12,15 @@ Then there came DynaMite. It promised to integrate mite into Mac OSX, which it d
 The (very) bad thing about it is, that it will stop your timers at 0:30 if you don't pay 10 &euro; for it. Even worse, I can't find any uninstall button.
 
 Ok, after that there was another week I was chillin with the fluid app. After this week, I got the idea to develop my very own client, a client that doesn't stop timers at 0:30 and fits my personal needs.
-This was the day when mighty-mite was born.
+This was the day when mite was born.
 
 So much for the history. I had some rough nights, hacking around with the mite-rb gem and thinking about auto-completion for bash. After one weekend and two nights of hard work, I got the initial commit pushed to github.
 
 h2. Use mite directly from the console
 
-This is something I've dreamed of, now the only running applications are TextMate and iTerm. If you are a person, who tends to optimize workflow or just like the console, I think you will love mighty-mite.
+This is something I've dreamed of, now the only running applications are TextMate and iTerm. If you are a person, who tends to optimize workflow or just like the console, I think you will love mite.
 
-Before mighty-mite I started working like this:
+Before mite I started working like this:
 
 * Open up Browser or Fluid app
 * Click my way through, till an empty time entry is running
@@ -44,7 +44,7 @@ You will learn soon, that some red %{color:red}0:25% indicates a stopped time en
 
 Let's recap what you've learned:
 
-* mighty-mite tends to be simple
+* mite tends to be simple
 * Your eyes already love it, because it highlights the important stuff
 
 h3. But what about all this typing? I prefer select boxes, 2 clicks against one line of text to select my project!
