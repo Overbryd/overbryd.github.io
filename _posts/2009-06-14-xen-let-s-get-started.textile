@@ -5,6 +5,8 @@ title: Xen let's get started
 
 "This quickstart helped a lot":http://www.pastacode.de/howto-virtualisierung-mit-xen-unter-debian-lenny-linux-kernel-2626/de/
 
+"I use this network configuration at hetzner":http://wiki.hetzner.de/index.php/Xen_auf_Debian_Etch_64bit_default_image
+
 Install the requirements:
 
 {% highlight bash %}
