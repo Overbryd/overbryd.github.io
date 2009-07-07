@@ -70,3 +70,13 @@ You decide the most comfortable way for yourself.
 {% endhighlight %}
 
 * Of course you'll need a mite. account, get one here: "mite.yo.lk":http://mite.yo.lk
+
+h3. Current version and updates
+
+Mite.cmd is actively maintained. @0.1.9@
+
+Update to the most recent version:
+
+{% highlight bash %}
+$ gem update Overbryd-mite.cmd
+{% endhighlight %}

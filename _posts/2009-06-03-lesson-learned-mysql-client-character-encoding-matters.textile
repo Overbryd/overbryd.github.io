@@ -75,7 +75,7 @@ After some research on the web for practical solutions, and some trial and error
 $ mysqldump -u root -p --opt --default-character-set=latin1 paperc_production -r paperc_production-latin1.sql
 {% endhighlight %}
 
-* Replace all @CHARSET@ and @NAMES@ instructions to be utf[2]:
+* Replace all @CHARSET@ and @NAMES@ instructions to be utf8[2]:
 
 {% highlight bash %}
 $ replace "CHARSET=latin1" "CHARSET=utf8" "SET NAMES latin1" "SET NAMES utf8" < paperc_production-latin1.sql > paperc_production-utf8.sql

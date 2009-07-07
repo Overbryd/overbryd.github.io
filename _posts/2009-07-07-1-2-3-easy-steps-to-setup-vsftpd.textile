@@ -1,0 +1,193 @@
+---
+layout: post
+title: 1 - 2 - 3 easy steps to setup vsftpd!
+---
+
+A simple guide on how to setup a secure ftp site. Plus a nice vsftpd configuration file that has advanced options but stays easy to read.
+
+h2. 1. Install
+
+Log onto your server, become root and install vsftpd (probably the worlds best ftp server, for more information visit "vsftpd.beasts.org":http://vsftpd.beasts.org).
+Besides I use @Debian Lenny@ on my servers, you may want to look up other installation steps for other systems.
+
+{% highlight bash %}
+$ aptitude install vsftpd
+{% endhighlight %}
+
+h2. 2. Configure
+
+The configuration file lives in @/etc/vsftpd.conf@ and is by default bloated with long comments.
+I've written my own configuration file, partly based on the original one, but with some more options to trigger.
+
+The following example meets this scenario:
+
+* I wanted a standalone (always running) ftp server, which allows one or more users to access a single directory.
+* The server should deny access to anonymous users and write access is disabled for everybody.
+* No system users should be exposed to the ftp service, so I want to use virtual users with different passwords.
+* All virtual users map to a single low privileged system user that just has read access to the directory I want to expose.
+* I wanted to manage the virtual users using htpasswd, therefore I've modified @/etc/pam.d/vsftpd@ (see Step 3).
+
+_You may notice that some configuration options are not necessary for this scenario. But this is my general vsftpd.conf that is easy to read and modify._
+
+{% highlight bash %}
+# Run the server in standalone mode
+listen=YES
+
+# Allow anonymous FTP? This will enable/disable all subsequent anonymous options
+anonymous_enable=NO
+
+# Allow anonymous users to upload files?
+anon_upload_enable=NO
+
+# Allow anonymous users to create directories?
+anon_mkdir_write_enable=NO
+
+# Allow local users to log in? (Is needed even in case of a virtual setup)
+local_enable=YES
+
+# Restrict local users to their home directories
+chroot_local_user=YES
+
+# Specify a user token
+user_sub_token=$USER
+
+# Treat all non-anonymous logins as 'guest' logins
+guest_enable=YES
+
+# Specify a system user to map 'guest' logins
+guest_username=my_user
+
+# Enable if virtual users shall use the same privileges as locals (default: NO)
+virtual_use_local_privs=NO
+
+# Hide user/group information of files and directories
+hide_ids=YES
+
+# Specify a directory to where users get chroote'd
+local_root=/srv/backup
+
+# Enable SSL, this will affect all subsequent ssl options
+ssl_enable=NO
+
+# Allow SSL for anonymous users
+allow_anon_ssl=NO
+
+# Enable to force all non-anonymous logins to use SSL in order to send and receive data
+force_local_data_ssl=YES
+
+# Enable to force all non-anonymous logins to use SSL in order to login
+force_local_logins_ssl=YES
+
+# Enable TLS v1 protocol connections
+ssl_tlsv1=YES
+
+# Enable SSL v2 protocol connections
+ssl_sslv2=YES
+
+# Enable SSL v3 protocol connections
+ssl_sslv3=YES
+
+# Specify a RSA certificate file to use for encrypted connections
+rsa_cert_file=/etc/vsftpd.d/vsftpd.pem
+
+# Allow any form of write command?
+write_enable=NO
+
+# Enable directory messages
+dirmessage_enable=NO
+
+# Enable transfer logs, you can specify a log file and if the xferlog format shall be used
+xferlog_enable=YES
+#xferlog_file=/var/log/vsftpd.log
+#xferlog_std_format=YES
+
+# Allow PORT transfer connections only from the following port (default: 20)
+connect_from_port_20=YES
+
+# Chown all created files to a specific username
+chown_uploads=NO
+chown_username=whoever
+
+# When to time out an idle session? (default: 600)
+#idle_session_timeout=600
+
+# When to time out a data connection? (default: 120)
+#data_connection_timeout=120
+
+# Define a totally isolated and unprivileged user
+#nopriv_user=ftpsecure
+
+# Enable asynchronous ABOR requests for backwards compability of older clients
+#async_abor_enable=YES
+
+# Enable ASCII mangling to really happen
+# Not recommended
+#ascii_upload_enable=YES
+#ascii_download_enable=YES
+
+# Customize your banner
+#ftpd_banner=Welcome to blah FTP service.
+
+# Enable a anonymous e-mail blacklist
+#deny_email_enable=YES
+#banned_email_file=/etc/vsftpd.banned_emails
+
+# Specify a list of local users to chroot to their home directory.
+# This options may become a list of users NOT to chroot if chroot_local_user is YES!
+#chroot_list_enable=YES
+#chroot_list_file=/etc/vsftpd.chroot_list
+
+# Enable recursive ls, may cause excessive I/O on large sites
+# Not recommended
+#ls_recurse_enable=YES
+
+## Debian customization
+
+# Specify an empty directory to chroot vsftpd at times it doesn't require filesystem access
+secure_chroot_dir=/var/run/vsftpd
+
+# Specify a PAM service name to use, see /etc/pam.d/ for pam services
+pam_service_name=vsftpd
+
+# Specify a RSA certificate to use for SSL encrypted connections
+rsa_cert_file=/etc/ssl/certs/vsftpd.pem
+{% endhighlight %}
+
+h2. 3. Manage
+
+As mentioned before, I'd like to manage virtual users by creating a users file using @htpasswd@. This is a utility that comes with apache, if you haven't installed a webserver on your machine, on debian, you need to install the @apache2-utils@ package.
+
+{% highlight bash %}
+$ aptitude install apache2-utils
+{% endhighlight %}
+
+Now we've got the tools, let's make some ftp users:
+
+{% highlight bash %}
+$ mkdir /etc/vsftpd.d
+$ htpasswd -c /etc/vsftpd.d/users billythekid
+# note: for other users to add you have to ommit the -c flag
+{% endhighlight %}
+
+**But wait!** vsftpd has no clue about the @users@ file. You need to reconfigure the @/etc/pam.d/vsftpd@ file in order to make use of the users file.
+
+{% highlight bash %}
+# Login using a htpasswd file
+auth    required pam_pwdfile.so pwdfile /etc/vsftpd.d/users
+account required pam_permit.so
+{% endhighlight %}
+
+On my machine I had to @$ aptitude install libpam-pwdfile@ to get things going.
+
+Now you're done. Really. Just restart vsftpd to pick up the new configuration. As long as you haven't defined any firewall rules that deny access to ftp service ports you should now be able to login on your brand new ftp server using the user you've created before.
+
+{% highlight bash %}
+$ /etc/init.d/vsftpd restart
+{% endhighlight %}
+
+h2. Credits
+
+I've to credit some resources that helped me write this article:
+
+* "Manpage of VSFTPD.CONF":http://vsftpd.beasts.org/vsftpd_conf.html
+* "Setup Virtual Users and Directories in VSFTPD":http://howto.gumph.org/content/setup-virtual-users-and-directories-in-vsftpd/
