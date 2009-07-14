@@ -1,0 +1,65 @@
+---
+layout: post
+title: Extend your bash PS1 with a git branch without breaking your prompt
+---
+
+To be a cool programmer, better said: to be an even cooler programmer, I wanted to add the current branch of the git repository I work in onto my terminal.
+
+Luckily this is very easy and you find tons of resources on how to do this via google. I've followed one of those guides and I ended up with a broken bash prompt.
+My bash prompt was suddenly ignoring newlines and was mainly acting strange if a prompt line was longer than the size of the terminal window.
+
+After some more research I found a solution for this problem: Unprintable characters confuse the bash prompt by computing the characters left on a prompt.
+To avoid this problem you can escape unprintable characters, so they don't interfere with bash's characters-left-computation.
+
+Here's a commented snippet on how to extend your @~/.bash_login@ (or some similar bash-rc file that holds user specific configurations):
+
+{% highlight bash %}
+# write a function to compute the current git branch
+parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+# set the PS1 variable
+PS1="\w\[\e[0;33;49m\]\$(parse_git_branch)\[\e[0;0m\]$ "
+
+# on any regular directory it will output:
+# /path/to/directory$ [PROMPT]
+
+# on a git repository it will output:
+# /path/to/directory(branch_name_in_yellow)$ [PROMPT]
+{% endhighlight %}
+
+h3. Some of the components for the PS1 explained:
+
+* @\w@ sets the full path to the current directory
+* @\W@ sets the name of the current directory
+* @\[@ begin of a unprintable character escape sequence
+* @\]@ end of a unprintable character escape sequence
+* @\e@ similar to \033, also known as escape sequence
+* @\e[X;Y;Zm@ bash color code sequence, all subsequent characters get styled after this rule
+  @X@ = effect
+    0 ... nothing
+    1 ... brighter
+    4 ... underline
+    5 ... blink
+    7 ... exchange foreground with background / invert
+    8 ... hidden
+  @Y@ = foreground color
+    30 ... black
+    31 ... red
+    32 ... green
+    33 ... yellow
+    34 ... blue
+    35 ... magenta
+    36 ... cyan
+    37 ... white
+    39 ... default color
+  @Z@ = background color
+    color codes the same as foreground color codes + 10
+    for example: 40 ... black
+* @\e[0;0m@ bash color code 'reset' sequence, all subsequent characters should look like before
+* @\$(function_name)@ call a function
+
+h3. Remember!
+
+Always wrap color stuff inside unprintable character escape brackets.
