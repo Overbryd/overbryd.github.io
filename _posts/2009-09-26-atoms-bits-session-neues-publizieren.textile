@@ -1,0 +1,100 @@
+---
+layout: post
+title: Atoms & Bits - Session 'Neues Publizieren'
+---
+
+Dieser Blogeintrag diente mir selbst als Vorbereitung für die Session auf dem Atoms & Bits Camp 09.
+Danke an die Teilnehmer der Diskussion, hier unten führe ich nochmal im Groben meine Gedankengänge auf. Ganz unten befindet sich auch eine kleine Linksammlung mit inhaltlich interessanten Beiträgen zu dem Thema.
+
+h3. Kurze Vorstellung zu meinem Hintergrund.
+
+* Gründungsmitglied & Entwickler bei der PaperC GmbH
+* PaperC ist eine Plattform zum kostenfreiem Lesen von Fachbüchern.
+* PaperC möchte Hochwertigen Content so einfach wie möglich zugänglich machen.
+* PaperC Modell: Kostenfrei Lesen, Bezahlen für die digitale Kopie. Die Kopie ermöglicht hilfreiche und produktive Zusatzfeatures. Die Kopie kann man zitieren, ausdrucken oder Notizen anfügen.
+* Andere ähnliche Projekte: Libreka, Google Buchsuche, Springerlink, Mendeley, uvm.
+
+h3. Probleme des konventionellen Publizierens in den neuen Medien aus meiner Erfahrung mit PaperC
+
+* Verlage haben Angst
+  -> Angststarre -> Macher sind Andere -> Besitzer des Contents Konventionelle
+
+* Im Naturell von Wissen und Information liegt es, dass sie frei sein will.
+  -> Problem der Monetarisierung
+
+* Produktionsprozesse sind fast komplett automatisiert.
+  -> Diese Rechtfertigung für den Verlag fällt weg
+  
+* Publizieren ist kinderleicht geworden.
+  -> Aber: Referenzierte, qualitativ hochwertige Information in den neuen Medien sehr schwer zu finden.
+  -> Wir dursten nach Wissen aber Ertrinken in Information.
+  
+* Probleme, die die Open Access Bewegung lösen möchte.
+  -> Wissenschafter haben es nicht leicht ihre Arbeiten zu veröffentlichen.
+  -> Fachautoren verdienen wenig mit ihrer Arbeit. Verlage verdienen zu viel an der Arbeit der Autoren.
+
+h3. Meine Zukunftsvision für das digitale Publizieren
+
+* Ziel: Wissen, Erkenntnisse und Information leicht zugänglich und qualitativ aufbereitet für Jedermann.
+
+* Ein wirtschaftlich/liberal orienterter Peer Review Prozess mithilfe von digitalen Tools.
+  -> Peer Review Plattform, Reviewer auffindbar nach Themengebiet
+  -> Reviewer direkt bezahlbar oder per Erlösbeteiligung
+  -> Fundraising für Werke. Investoren können Microinvestements an Bücher gegen Erlösbeteiligung tätigen.
+  -> Am Steuer des Vorgangs ist der Autor.
+  -> Generell: Digitale Abbildung der Organisation einer Buchproduktion
+
+* Das Produktionsmonopol für Bücher wird 'zerschlagen'. Dienstleister in den einzelnen Bereiche 'Qualität', 'Layout', 'Druck', 'elektronische Aufarbeitung' werden von selbstorganisierten Autoren beauftragt.
+
+* Neue Erlösmodelle. Z.B.: Erlösbeteiligung für Mitarbeiter eines Werkes.
+
+* Renommierte Autoren werden zunehmend selbst publizieren.
+
+* Junge Autoren publizieren bereits selbst, und werden einen Weg finden Annerkennung und Verbreitung zu erlangen!
+
+h3. Diskussion
+
+* Ziel: Anreize zu geben für neue Ideen. Bloggt, schreibt über das Thema und bringt euch ein!
+
+* Informationsparadoxon nach Arrow
+  "Das Informationsparadoxon nach Arrow beschreibt die Problematik, dass der Wert von Information nur ermittelbar ist, wenn die Information bereits bekannt ist. Ist die Information jedoch bereits bekannt, muß sie nicht mehr beschafft werden."
+
+* Wie kann eine Qualitätssicherung mithilfe des Internets gewährleistet bleiben?
+
+* Wie könnte eine Migration zu den neuen Medien für Autoren aussehen?
+* Wie würde diese für einen Verlag aussehen?
+
+h3. Weiterführendes Material
+
+Hier findet sich eine Sammlung an interessanten Beiträgen zu dem Thema 'Neues Publizieren'. Bitte tragt eure Findungen einfach in den Kommentaren nach.
+
+* Bibliotheken:
+  http://www.ub.uni-dortmund.de/listen/inetbib/msg40312.html
+  http://www.digital-scholarship.org/sepb/sepb.html
+  http://oebib.wordpress.com/
+
+* Verlage:
+  "Gefangenendilemma der Print Verlage" http://blog.handelsblatt.de/indiskretion/eintrag.php?id=2189
+  
+* Zeitungen:
+  http://nytimes.com
+  
+* Wissenschaftler:
+  http://www.kopfschlaegtkapital.com - Günte  r Faltin
+  http://labor.entrepreneurship.de - Günter   Faltin
+
+* Gründer, Ausgründungen:
+  http://paperc.de
+  http://libreka.de
+  http://epubli.de
+
+* Schreiber, Denker, Kreative:
+  http://www.blicklog.com
+  http://blog.paperc.de
+
+* Diverses
+  Arrow'sches Informationsparadoxon
+  http://www.tu-chemnitz.de/wirtschaft/fsr/wiki/index.php/Informationsparadoxon_nach_Arrow
+
+* Arbeiten, Bücher:
+  
