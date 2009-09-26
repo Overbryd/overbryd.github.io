@@ -6,6 +6,7 @@ layout: default
   <h1>{{ page.title }}</h1>
   {{ content }}
   <hr/>
+  <a name="add_your_opinion">&nbsp;</a>
   <div id="disqus_thread">
     
   </div>
@@ -16,13 +17,17 @@ layout: default
   <span class="title">{{ page.date | date: "%b %Y" }}</span>
   <span class="day">{{ page.date | date: "%d" }}</span>
 </div>
-<!--
 <div class="share sidebox">
   <span class="title">Share</span>
+  <a href="http://www.addthis.com/bookmark.php?v=250"
+    class="addthis_button">
+    <img src="http://s7.addthis.com/static/btn/sm-plus.gif" 
+      align="middle"
+      width="16" height="16" border="0" alt="Share" />
+  </a>
 </div>
-<div class="opinions sidebox">
+<div id="opinions_sidebox" class="opinions sidebox">
   <span class="title">Opinions</span>
   <span class="count">0</span>
-  <a href="#">add yours</a>
+  <a href="#add_your_opinion">add yours</a>
 </div>
--->

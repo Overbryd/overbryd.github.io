@@ -214,6 +214,7 @@ a#forkme:hover {
   font-size:.8em;
   color:#333;
   text-align:left;
+  margin-top:20px;
 }
 #coffeemug {
   position:absolute;
@@ -240,8 +241,12 @@ ul.vertical.navigation li a:hover {
 }
 #manifesto {
   margin-top:20px;
-  color:#3b3b3b;
-  font-size:75%;
+  color:#fff;
+}
+#manifesto p,
+#manifesto h3 {
+  font-size:.75em;
+  opacity:0.75;
 }
 #manifesto h3 {
   text-align:right;
@@ -302,6 +307,20 @@ ul.post_list {
   display:block;
   line-height:36px;
   font-size:22px;
+}
+.addthis_button {
+  display:block;
+  width:20px; height:20px;
+  margin:5px 18px;
+  text-align:center;
+  text-decoration:none;
+}
+.addthis_button img {
+  margin:0;
+  border:2px solid white;
+  border-radius:8px;
+  -moz-border-radius:8px;
+  -webkit-border-radius:8px;
 }
 .opinions.sidebox {
   height:79px;

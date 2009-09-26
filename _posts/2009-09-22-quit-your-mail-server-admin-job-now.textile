@@ -1,0 +1,108 @@
+---
+layout: post
+title: Quit your mail server admin job. Now!
+---
+
+This blog post outlines the problems when rolling your own mail server. And I propose a pragmatic solution that utilizes Google Apps.
+
+h2. The mail server problem
+
+Managing a server isn't that hard. Actually, if you know what you're doing it's pretty easy. But it costs you time, and this is why you should think twice if you tend to manage everything by your own.
+I am such a person. I like to control my servers, or better said, I like to know that I can change whatever I want whenever I want on my servers.
+That's why I ran my own mailserver in first place. And it felt somehow cool and easy. After I've learned on how to configure postfix to use virtual users - I _just_ had to add another line to the mail users table via mysql.
+
+h3. 1. Unexpected downtime
+
+Once upon a time, somehow, a part of the system stopped working. And I had to fix it with my bare hands, stopping everything I was doing at this moment and spent an afternoon finding and fixing the problem. Eventually the mailserver was 5 hrs out of service, which isn't that bad, because mailing is fault tolerant. But I might have missed an important email in this time, which could be REALLY BAD.
+
+h3. 2. Mail account management
+
+The start up I am working in has three core team members. Unfortunately I am the only guy who knows on how to _just_ add another line to the mail users table via mysql.
+The real problem was, that I was in vacation over a week and nobody on my team knew how to setup a new mail account for the internship.
+
+h3. 3. Reliable mailing for your application
+
+Application mailing is very important for almost every web-business case. You need to communicate with your users. And users expect communication from your application. And they might even rely on communication from your application.
+The most common way (even in these days) is to send emails, so you are probably going to implement something that sends e-mails to your users.
+If the mail server fails, your application fails.
+I had this problem once, because of a misconfiguration on the mail server killed the user registration for about 8 hours. Compared to a whole year, 8 hours are nothing. According to the exception notification I use, about 6 people were affected of this problem.
+And I know from my own experience, a web service that doesn't work quite well in first place is a web service I'm not satisfied with.
+
+h2. What you really want
+
+* Sending and receiving emails.
+* Sending and receiving emails, 52 weeks a year, 7 days a week, 24 hrs a day. *Reliability* is an underestimated but vitally important communication factor!
+* Sending emails from your application
+* Manage mail accounts without technical knowledge
+* Webmail without the technical infrastructure hassle
+* Pay less
+* Save time
+
+h2. What you could do to avoid emails completely
+
+Use twitter. Really, you could do that. The registration process could be based on twitter (OAuth authentication), messages and notifications from you application could be sent as tweets or direct messages to the users.
+I'd like to see an application that doesn't rely on email any more. The more I could keep my inbox clean from application messages, the happier I would be.
+
+This post will only cover the email part, so we're still using it. But if you're interested, there's the "twitter gem":http://twitter.rubyforge.org, "Twitter4R":http://twitter4r.rubyforge.org/ or the endless list of "a github search for 'twitter' in the ruby language":http://github.com/search?type=Repositories&language=rb&q=twitter&repo=&langOverride=&x=0&y=0&start_value=1. 'Nuff said.
+
+h2. What I did as a first step
+
+PaperC as a start up doesn't want to pay a lot for servers and infrastructure. On one side we rent servers to power our system on the other we tend to outsource services.
+At the moment the platform is quite manageable, so it doesn't require a high load system to send emails. This is why we've chosen Google Apps to satisfy our mailing needs. And it fits in quite perfectly so far.
+As an outlook for the future I think of a solution from "http://rackspace.com":http://rackspace.com.
+
+h2. How to integrate Google Apps into your rails app
+
+Again: Google Apps suits well only for smaller applications, because they have a per day sending limit for mail accounts.
+So think of the scale of your app and how many mails per day will be send out. Otherwise you might want to look for an service without limits from a professional mail host.
+The limits per mail account from Google Mail (and for the free Google Apps account) are[1]:
+
+* Standard Edition:
+  -> 500 external recipients per day
+* Premier and Education Edition:
+  -> 2000 external recipients per day
+
+__The email addresses can be distributed among the To:, Cc:, and Bcc: fields.__
+
+1. "Sign up for Google Apps":http://apps.google.com/
+
+2. Set up a mail account to send mails from your server
+
+3. "Follow the update instructions":http://www.google.com/support/a/bin/answer.py?answer=33352 for your XM records to send email from your server
+
+4. I highly recommend you to use a spf record to lower the risk of sending mail into spam folders
+  Good tools to accomplish this are:
+  -> "The SPF Setup Wizard":http://old.openspf.org/wizard.html
+  -> "SPF Query Tool":http://www.kitterman.com/spf/validate.html
+
+5. Edit your @config/environments/production.rb@:
+
+{% highlight ruby %}
+ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.smtp_settings = {
+  :domain => "yourdomain.com",
+  :address => "smtp.googlemail.com",
+  :tls => true,
+  :authentication => :plain,
+  :user_name => "your-apps-mail@yourdomain.com",
+  :password => "yourpassword"
+}
+{% endhighlight %}
+
+6. Install and apply the @simple-tls@ gem:
+
+{% highlight bash %}
+$ sudo gem install ambethia-smtp-tls -shttp://gems.github.com
+{% endhighlight %}
+
+{% highlight ruby %}
+# in config/environment.rb
+config.gem 'ambethia-smtp-tls', :lib => 'smtp-tls', :version => '1.1.2', :source => 'http://gems.github.com'
+{% endhighlight %}
+
+7. Deploy and relax.
+  Errm, after relaxing remember to __check mail load regularly and switch over to a better provider or upgrade your Google Apps account if needed.__
+
+h3. References
+
+fn1. "Sending Limit - Google Apps Help":http://www.google.com/support/forum/p/Google+Apps/thread?tid=700114a96b58afe7&hl=en

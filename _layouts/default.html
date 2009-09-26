@@ -7,24 +7,6 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/960gs.css" />
     <link rel="stylesheet" type="text/css" href="/stylesheets/syntax.css" />
     <link rel="stylesheet" type="text/css" href="/stylesheets/default.css" />
-    
-    <script type="text/javascript" src="/javascripts/jquery-1.3.2.min.js"></script>
-    <script type="text/javascript" src="/javascripts/jquery.driveby.js"></script>
-    <script type="text/javascript">
-      jQuery(document).ready(function() {
-        $('#followme').driveBy({
-          mouseenter: {
-            'opacity': 100
-          },
-          radius: 250
-        }).css('opacity', 0);
-        $('#forkme').driveBy({
-          mouseenter: {
-            'opacity': 100
-          }
-        }).css('opacity', 0);
-      });
-    </script>
   </head>
   <body id="body">
     <div id="header">
@@ -53,7 +35,7 @@
             <div id="aboutme" class="clearfix">
               <div id="coffeemug"></div>
               <p class="small">
-                <img src="http://gravatar.com/avatar/171de85d4d79cb7afe725174fb099137.jpg" width="40px" height="40px" alt="My Gravatar" align="left"/>Hy, my name is Lukas Rieder.<br/><br/>
+                <img src="http://gravatar.com/avatar/171de85d4d79cb7afe725174fb099137.jpg" width="40px" height="40px" alt="My Gravatar" align="middle"/>Hy, my name is Lukas Rieder.
                 You can <a href="/contact.html">Contact me here</a>.
               </p>
               <ul class="vertical navigation">
@@ -81,14 +63,60 @@
       </div>
           
     </div>
+    <script type="text/javascript" src="/javascripts/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="/javascripts/application.js"></script>
     <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+      var addthis_config = {
+        username: 'Overbryd',
+        services_compact: 'email, facebook, twitter, more',
+        services_exclude: 'print'
+      }
+      $(function() {
+        // DriveBy Animation of the twitter follow button and the github profile button
+        $('#followme').driveBy({
+          mouseenter: {
+            'opacity': 100
+          },
+          radius: 250
+        }).css('opacity', 0);
+        $('#forkme').driveBy({
+          mouseenter: {
+            'opacity': 100
+          }
+        }).css('opacity', 0);
+        
+        // Manifesto Animation
+        $('#manifesto :children').hover(
+          function(){
+            $(this).stop();
+            $(this).animate({fontSize:'1em', opacity:1}, 'normal');
+          },
+          function(){
+            $(this).stop();
+            $(this).animate({fontSize:'0.75em', opacity:0.75}, 'normal');
+          }
+        );
+        
+        // Count the disqus conversations for each post
+        update_comments_count = function(){
+          counter = $('#dsq-num-posts');
+          if(counter && parseInt(counter.text()) > 0){
+            $('#opinions_sidebox .count').text(counter.text());
+          }else{
+            $('#opinions_sidebox .count').text('0');
+          }
+        }
+        setInterval('update_comments_count()', 5000);
+        
+      });
+      
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+      try {
+      var pageTracker = _gat._getTracker("UA-2373458-13");
+      pageTracker._trackPageview();
+      } catch(err) {}
     </script>
-    <script type="text/javascript">
-    try {
-    var pageTracker = _gat._getTracker("UA-2373458-13");
-    pageTracker._trackPageview();
-    } catch(err) {}</script>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js"></script>
   </body>
 </html>
