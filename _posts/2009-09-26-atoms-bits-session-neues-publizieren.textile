@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Atoms & Bits - Session 'Neues Publizieren'
+title: Atoms & Bits -- Session 'Neues Publizieren'
 ---
 
 Dieser Blogeintrag diente mir selbst als Vorbereitung für die Session auf dem Atoms & Bits Camp 09.
