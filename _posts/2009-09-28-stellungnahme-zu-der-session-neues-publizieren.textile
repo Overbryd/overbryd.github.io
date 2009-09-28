@@ -1,0 +1,57 @@
+---
+layout: post
+title: Stellungnahme zu der Session 'Neues Publizieren'
+---
+
+Ja, es hat nun auch mich erwischt. Ein berühmtes Problem wenn man sich mit einem kritischen Thema auseinandersetzt.
+Bitte lies weiter um die Zusammenhänge zu verstehen, die auf "der Atoms & Bits Zusammenfassung":http://www.blogpiloten.de/2009/09/27/publizierenwarten-bis-dinosaurier-aussterben/ aus journalistischer Freiheit heraus nicht genügend reflektiert wurden.
+
+h2. Was hat es mit der Session 'Neues Publizieren' auf sich?
+
+Seit geraumer Zeit begeistert mich dieses diffuse komplexe Thema, bedingt durch die Arbeit für PaperC.
+Ich habe das Atoms & Bits Camp besucht um einfach Leute kennen zu lernen und andere spannende Themen zu entdecken. Das es dazu kommt, dass ich dort selbst eine sogenannte Session halte war reiner Zufall.[1]
+
+Also habe ich das dortige Publikum gefragt ob Interesse bestehe, eine Diskussionsrunde zum Thema 'Neues Publizieren' zu machen. Erfreulicherweise meldeten sich ein paar Menschen.
+
+Die Session selbst zog im Endeffekt 8 Leute an und nachdem ich mich und PaperC vorgestellt habe löste sich langsam eine Diskussion aus. Ich muss mir selbst eingestehen, dass die Diskussion etwas verlaufen war. Der rote Faden durch das mehr als diffuse Thema konnte meiner Meinung nach nicht durchgehend gehalten werden. Dennoch bin ich froh über die Beträge der Teilnehmer, die mir wiederum gutes Feedback gaben.
+
+h2. Wie ich das Thema 'Neues Publizieren' sehe
+
+Wie schon gesagt, ein sehr diffuser Titel für ein noch viel komplexeres Thema.
+
+Vor der Session habe ich mich Stichwortartig vorbereitet, "was man hier nachlesen kann":/2009/09/26/atoms-bits-session-neues-publizieren.html.
+
+In einem Satz: Ich denke, dass die Probleme der Verlage durch das Internet gelöst werden können.
+
+h2. Was ist das Problem an dem Blog Post auf blogpiloten.de[2]?
+
+Ich würde gerne aber noch ein paar Worte hinzufügen, denn meine Aussagen alleine in den Raum gestellt wirken stark so, dass ich mir Verlage bedingungslos wegwünsche.
+
+Das stimmt so in der Form nicht. Bitte lies weiter:
+
+In der Session ist es eventuell etwas untergegangen, aber ich kann mich erinnern auch darüber gesprochen zu haben, eine Parallelität zu schaffen. Es wird meiner Meinung nach weiterhin Verlage geben, in allen Bereichen.
+
+Aber ich bin der Überzeugung, dass viele Verlage sich verändern müssen und das Internet für sich entdecken müssen um weiter bestehen zu können. Deshalb die Aussage, dass Dinosaurier aussterben, wenn sie sich nicht weiterentwickeln.
+Das ist die eine Schiene der Parallelität, Verlage existieren weiter, aber in neuen moderneren und an das Internet angepassten Formen. Die andere ist meine Vision, dass Dienstleister oder Freelancer
+Einzelaufgaben aus dem Verlagswegen anbieten, und Autoren diese
+selbstorganisiert beauftragen werden.
+
+Die letztere Position möchte ich noch hiermit unterstreichen: Ich denke, dass eine funktionierende demokratische Qualitätssicherung für selbstorganisierte Autoren unbedingt notwendig ist.
+
+Verlage sind stark in der qualitätssichernden selektiven Rolle, deshalb werden sie auch weiterhin wichtig sein, wenn es ums Publizieren geht.
+
+h3. In dem aufgeklärten Sinne:
+
+Ich bin allen Verlagen, die sich die Mühe machen mit PaperC zusammen zu arbeiten, zu großem Dank verpflichtet. Ich bin überzeugt, dass der Weg den PaperC geht und der Weg den Verlage mit PaperC gehen, ein wichtiger Schritt ist hin zur Modernisierung des Publizierens!
+
+Aber das ist nicht das Ende der Fahnenstange. Das Internet hat mehr Potential für Verlage, Autoren und das Publizieren! Es gibt noch viele unentdeckte Möglichkeiten, und daran forscht, denkt und entwickelt PaperC aktiv mit!
+
+h3. Fragen, Kritik, Anregungen und Diskussion
+
+Die Kommentare meiner Seite stehen offen, ich freue mich über jedes Feedback zu diesem Thema.
+
+h3. Referenzen
+
+fn1. Was ist eigentlich ein Bar Camp? Wie sieht eine solche Veranstaltung aus? "Wikipedia Artikel über das Bar Camp Format":http://de.wikipedia.org/wiki/BarCamp
+
+fn2. Blogeintrag auf blogpiloten.de: "Publizieren: “Warten, bis Dinosaurier aussterben":http://www.blogpiloten.de/2009/09/27/publizierenwarten-bis-dinosaurier-aussterben/
