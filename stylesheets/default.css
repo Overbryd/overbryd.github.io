@@ -197,6 +197,14 @@ a#forkme {
 a#forkme:hover {
   background-position:0 -90px;
 }
+a#feedme {
+  float:right;
+  display:block;
+  width:14px; height:14px;
+  overflow:hidden;
+  text-indent:-1000px;
+  background:no-repeat url(../images/feedme.png);
+}
 #sidebar {
   position:relative;
   top:-26px;
@@ -215,6 +223,10 @@ a#forkme:hover {
   color:#333;
   text-align:left;
   margin-top:20px;
+}
+img#gravatar {
+  float:left;
+  margin-top:.4em;
 }
 #coffeemug {
   position:absolute;
