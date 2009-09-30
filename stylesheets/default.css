@@ -42,10 +42,12 @@ sup {
   font-size:.8em;
   vertical-align:super;
 }
-ul {
-  list-style:disc;
+dl, ul {
   margin:1em 0 1em 1.3em;
   line-height:1.5em;
+}
+ul {
+  list-style:disc;
 }
 ol {
   margin:1em 0 1em 1.5em;
