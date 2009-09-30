@@ -4,7 +4,7 @@ title: Stellungnahme zu der Session 'Neues Publizieren'
 ---
 
 Ja, es hat nun auch mich erwischt. Ein berühmtes Problem wenn man sich mit einem kritischen Thema auseinandersetzt.
-Bitte lies weiter um die Zusammenhänge zu verstehen, die auf "der Atoms & Bits Zusammenfassung":http://www.blogpiloten.de/2009/09/27/publizierenwarten-bis-dinosaurier-aussterben/ aus journalistischer Freiheit heraus nicht genügend reflektiert wurden.
+Bitte lies weiter um die Zusammenhänge zu verstehen, die auf "der Atoms & Bits Zusammenfassung":http://www.blogpiloten.de/2009/09/29/publizierenwarten-bis-dinosaurier-aussterben/ aus journalistischer Freiheit heraus nicht genügend reflektiert wurden.
 
 h2. Was hat es mit der Session 'Neues Publizieren' auf sich?
 
@@ -54,4 +54,4 @@ h3. Referenzen
 
 fn1. Was ist eigentlich ein Bar Camp? Wie sieht eine solche Veranstaltung aus? "Wikipedia Artikel über das Bar Camp Format":http://de.wikipedia.org/wiki/BarCamp
 
-fn2. Blogeintrag auf blogpiloten.de: "Publizieren: “Warten, bis Dinosaurier aussterben":http://www.blogpiloten.de/2009/09/27/publizierenwarten-bis-dinosaurier-aussterben/
+fn2. Blogeintrag auf blogpiloten.de: "Publizieren: “Warten, bis Dinosaurier aussterben":http://www.blogpiloten.de/2009/09/29/publizierenwarten-bis-dinosaurier-aussterben/
