@@ -5,6 +5,8 @@ title: 1 - 2 - 3 easy steps to setup vsftpd!
 
 A simple guide on how to setup a secure ftp site. Plus a nice vsftpd configuration file that has advanced options but stays easy to read.
 
+**Update: ** Updated step 2 to highlight the important configuration values, that must be adjusted to fit your needs.
+
 h2. 1. Install
 
 Log onto your server, become root and install vsftpd (probably the worlds best ftp server, for more information visit "vsftpd.beasts.org":http://vsftpd.beasts.org).
@@ -28,6 +30,11 @@ The following example meets this scenario:
 * I wanted to manage the virtual users using htpasswd, therefore I've modified @/etc/pam.d/vsftpd@ (see Step 3).
 
 _You may notice that some configuration options are not necessary for this scenario. But this is my general vsftpd.conf that is easy to read and modify._
+
+The important values to adjust are:
+
+* @local_root@ ... what directory do you want to serve?
+* @guest_username@ ... low privileged user to map files to. (default vsftp)
 
 {% highlight bash %}
 # Run the server in standalone mode
@@ -55,7 +62,7 @@ user_sub_token=$USER
 guest_enable=YES
 
 # Specify a system user to map 'guest' logins
-guest_username=my_user
+guest_username=vsftp
 
 # Enable if virtual users shall use the same privileges as locals (default: NO)
 virtual_use_local_privs=NO
@@ -64,7 +71,7 @@ virtual_use_local_privs=NO
 hide_ids=YES
 
 # Specify a directory to where users get chroote'd
-local_root=/srv/backup
+local_root=/var/ftp_data
 
 # Enable SSL, this will affect all subsequent ssl options
 ssl_enable=NO
