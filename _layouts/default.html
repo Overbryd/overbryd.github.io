@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/960gs.css" />
     <link rel="stylesheet" type="text/css" href="/stylesheets/syntax.css" />
     <link rel="stylesheet" type="text/css" href="/stylesheets/default.css" />
+    {{ if page.robots }}<meta name="robots" content="{{ page.robots }}" />{{ endif }}
   </head>
   <body id="body">
     <div id="header">
@@ -38,7 +39,7 @@
               <p class="small">
                 <img id="gravatar" src="http://gravatar.com/avatar/171de85d4d79cb7afe725174fb099137.jpg" width="40px" height="40px" alt="My Gravatar" align="middle"/>
                 Hy, my name is Lukas Rieder.
-                You can <a href="/contact.html">Contact me here</a>.
+                You can <a href="/contact.html">contact me here</a>.
                 Comments are welcome.
               </p>
               <ul class="vertical navigation">
