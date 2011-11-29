@@ -17,7 +17,7 @@ h1:first-child {
   border-top:none;
 }
 h2 {
-  font-size:150%;
+  font-size:1.5em;
   margin-top:1.5em;
   border-bottom:4px solid #e0e0e0;
   padding-top:.5em;
@@ -293,6 +293,9 @@ ul.post_list {
   margin:0 .5em 0 0;
   color:#333;
   font-family:Inconsolata, monospace;
+}
+#older-blog-posts {
+  clear:both;
 }
 #content .col2 {
   float:right;

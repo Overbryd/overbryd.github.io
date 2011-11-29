@@ -1,0 +1,14 @@
+/* line 1, ../sass/print.scss */
+a {
+  text-decoration: none;
+}
+
+/* line 4, ../sass/print.scss */
+.noprint {
+  display: none;
+}
+
+/* line 7, ../sass/print.scss */
+#games-sideprojects-conferences {
+  page-break-before: always;
+}
