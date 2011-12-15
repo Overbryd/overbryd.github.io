@@ -1,20 +1,134 @@
----
-layout: default
-title: Lukas Rieder
----
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+    <title>Lukas Rieder, developer, entrepreneur and freelancer</title>
+    <style type="text/css">
+      body {
+        font-family: Georgia;
+        font-size: 62.5%;
+        color: #444;
+        line-height: 2.5em;
+        padding-top: 75px;
+        background: url(resume/images/background.png);
+        height: 100%;
+      }
+      h1, h2, h3 {
+        color: #444;
+        text-align:center;
+      }
+      a {
+        color: #444;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      h1 a:hover, h2 a:hover, h3 a:hover {
+        text-decoration: none;
+        -moz-text-shadow: #ccc 0 1px 1px;
+        -webkit-text-shadow: #ccc 0 1px 1px;
+        -o-text-shadow: #ccc 0 1px 1px;
+        text-shadow: #ccc 0 1px 1px;
+      }
+      h1 a, h2 a, h3 a {
+        -moz-text-shadow: #fff 0 1px 1px;
+        -webkit-text-shadow: #fff 0 1px 1px;
+        -o-text-shadow: #fff 0 1px 1px;
+        text-shadow: #fff 0 1px 1px;
+      }
+      #message, #older-posts {
+        width:512px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      #older-posts {
+        left:0; bottom:0;
+        padding:10px;
+        font-family: Verdana;
+        line-height: 2em;
+      }
+      #older-posts ul {
+        margin: 0;
+        padding: 0;
+      }
+      #older-posts li {
+        list-style: none;
+        margin-bottom: 1em;
+      }
+      #older-posts, #older-posts a {
+        color: #aaa;
+      }
+      #older-posts .date {
+        display: block;
+        line-height: 1em;
+        color: #eee;
+      }
+      #older-posts li:hover span {
+        color:#ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="message">
+      <h1>I have plans to update my website</h1>
+      <h2><a href="http://twitter.com/Overbrd">@Overbryd</a></h2>
+    </div>
+    <div id="older-posts">
+      <p>Here are the links to my older blog posts:</p>
+      <ul class="post_list">
 
-<div class="post">
-  {% for post in site.posts limit:1 %}
-    <h1>{{ post.title }}</h1>
-    {{ post.content | truncatewords 200 }}
-    <a href="{{ post.url }}">Read more about: {{ post.title }}</a>
-  {% endfor %}
-</div>
-<div id="older-blog-posts">
-  <h1>Older blog posts</h1>
-  <ul class="post_list">
-    {% for post in site.posts limit:15 offset:1 %}
-      <li><span class="date">{{ post.date | date: "%d %b %Y" }}</span><a href="{{ post.url }}">{{ post.title }}</a>
-    {% endfor %}
-  </ul>
-</div>
+          <li><span class="date">05 Oct 2009</span>
+<a href="/2009/10/05/the-world-would-be-a-better-place-if.html">The world would be a better place if...</a>
+
+          </li><li><span class="date">28 Sep 2009</span>
+<a href="/2009/09/28/stellungnahme-zu-der-session-neues-publizieren.html">Stellungnahme zu der Session 'Neues Publizieren'</a>
+
+          </li><li><span class="date">26 Sep 2009</span>
+<a href="/2009/09/26/atoms-bits-session-neues-publizieren.html">Atoms &amp; Bits -- Session 'Neues Publizieren'</a>
+
+          </li><li><span class="date">22 Sep 2009</span>
+<a href="/2009/09/22/quit-your-mail-server-admin-job-now.html">Quit your mail server admin job. Now!</a>
+
+          </li><li><span class="date">14 Jul 2009</span>
+<a href="/2009/07/14/extend-your-bash-ps1.html">Extend your bash PS1 with a git branch without breaking your prompt</a>
+
+          </li><li><span class="date">07 Jul 2009</span>
+<a href="/2009/07/07/1-2-3-easy-steps-to-setup-vsftpd.html">1 - 2 - 3 easy steps to setup vsftpd!</a>
+
+          </li><li><span class="date">03 Jun 2009</span>
+<a href="/2009/06/03/lesson-learned-mysql-client-character-encoding-matters.html">Lesson learned -- MySQL client character encoding matters</a>
+
+          </li><li><span class="date">27 May 2009</span>
+<a href="/2009/05/27/railsway-berlin-rails-performance.html">Railsway 09 -- Rails performance</a>
+
+          </li><li><span class="date">26 May 2009</span>
+<a href="/2009/05/26/railsway-berlin-haml-and-sass.html">Railsway 09 Berlin -- HAML, SASS (and COMPASS)</a>
+
+          </li><li><span class="date">22 May 2009</span>
+<a href="/2009/05/22/mite.cmd-a-command-line-interface-for-mite.html">Meet mite.cmd, a simple command line interface for mite!</a>
+
+          </li><li><span class="date">13 May 2009</span>
+<a href="/2009/05/13/migrate-old-passwords-with-auth_logic.html">Migrate (nearly) any encryption system to AuthLogic</a>
+
+          </li><li><span class="date">13 May 2009</span>
+<a href="/2009/05/13/group_concat_max_len-limitation-and-thinking-sphinx.html">How to overcome the group_concat_max_len limitation in mysql to join large text columns in thinking sphinx</a>
+
+      </li>
+    </ul>
+    </div>
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4ee22be8f5a1f50777000003');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+  </body>
+</html>
