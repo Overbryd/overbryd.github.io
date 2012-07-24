@@ -16,7 +16,8 @@ Here's a commented snippet on how to extend your @~/.bash_login@ (or some simila
 {% highlight bash %}
 # write a function to compute the current git branch
 parse_git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+  local b=$(git symbolic-ref HEAD 2> /dev/null)
+  echo -n "${b#refs/heads/}"
 }
 
 # set the PS1 variable
