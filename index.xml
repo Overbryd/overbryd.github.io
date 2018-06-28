@@ -6,21 +6,23 @@
     <description>Recent content on Lukas Rieder</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 28 Jun 2018 20:00:55 +0200</lastBuildDate>
+    <copyright>Copyright 2018, Lukas Rieder</copyright>
+    <lastBuildDate>Thu, 28 Jun 2018 18:00:55 +0000</lastBuildDate>
     
 	<atom:link href="https://www.lukasrieder.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Master Root Commit A0d3a2e</title>
+      <title>master (root-commit) a0d3a2e</title>
       <link>https://www.lukasrieder.com/posts/master-root-commit-a0d3a2e/</link>
-      <pubDate>Thu, 28 Jun 2018 20:00:55 +0200</pubDate>
+      <pubDate>Thu, 28 Jun 2018 18:00:55 +0000</pubDate>
       
       <guid>https://www.lukasrieder.com/posts/master-root-commit-a0d3a2e/</guid>
-      <description>Starting fresh I have a repository overbryd.github.io. Its first commit dates back to Feb 27, 2009.
-It was about time to restart my blog. There is so much happening right now, many very good things, that ought to be shared.
-So lean back, get your favorite beverage and dive right into my world. I really hope you can enjoy reading my blog.
-We are now at [master (root-commit) a0d3a2e] starting fresh</description>
+      <description>&lt;p&gt;It was about time to restart my blog. There are so many great things happening right now.
+All want to be shared, dissected and written up.&lt;/p&gt;
+
+&lt;p&gt;Now I have completely reset my content pipeline. &lt;strong&gt;New&lt;/strong&gt; static site generator. &lt;strong&gt;New&lt;/strong&gt; repository layout. &lt;strong&gt;New&lt;/strong&gt; template.
+&lt;/p&gt;</description>
     </item>
     
   </channel>
