@@ -1,7 +1,6 @@
 ---
 title: "Master Root Commit A0d3a2e"
 date: 2018-06-28T20:00:55+02:00
-draft: true
 ---
 
 # Starting fresh

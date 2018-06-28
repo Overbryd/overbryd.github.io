@@ -1,5 +1,12 @@
 baseURL = "https://www.lukasrieder.com/"
-languageCode = "en-us"
-title = "Lukas Rieder
+languageCode = "en"
+title = "Lukas Rieder"
 theme = "whiteplain"
+
+[params.author]
+  name = "Lukas Rieder"
+  gravatar = "d4f0c3a27e454819fcf056a653ae737c"
+  github = "Overbryd"
+  stackoverflow = "Overbryd"
+  slideshare = "Overbryd"
 

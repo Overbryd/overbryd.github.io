@@ -1,3 +1,4 @@
 [submodule "themes/whiteplain"]
 	path = themes/whiteplain
-	url = git@github.com:Overbryd/whiteplain.git
+	url = https://github.com/Overbryd/whiteplain.git
+
