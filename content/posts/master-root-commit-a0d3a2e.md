@@ -17,6 +17,6 @@ First, since I am a hacker by heart, I _have completely reset_ my publication pi
 
 Lean back, subscribe, and dive right into my world. I really hope you can enjoy reading my blog.
 
-We are now at `master (root-commit) a0d3a2e`
+We are now at `50a875be3eac870121c72c3e0951d8c8257db1fc Initializing master branch for publication`.
 
 So much to do, so much to write.
