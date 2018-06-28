@@ -17,6 +17,6 @@ First, since I am a hacker by heart, I _have completely reset_ my publication pi
 
 Lean back, subscribe, and dive right into my world. I really hope you can enjoy reading my blog.
 
-We are now at `\[master (root-commit) a0d3a2e\] starting fresh`
+We are now at `master (root-commit) a0d3a2e`
 
 So much to do, so much to write.
