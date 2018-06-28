@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Lukas Rieder</title>
-    <link>https://www.lukasrieder.com/</link>
-    <description>Recent content on Lukas Rieder</description>
+    <title>Posts on Lukas Rieder</title>
+    <link>https://www.lukasrieder.com/posts/</link>
+    <description>Recent content in Posts on Lukas Rieder</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 28 Jun 2018 20:00:55 +0200</lastBuildDate>
     
-	<atom:link href="https://www.lukasrieder.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.lukasrieder.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>

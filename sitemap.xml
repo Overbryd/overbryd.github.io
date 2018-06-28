@@ -3,12 +3,24 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.lukasrieder.com/posts/master-root-commit-a0d3a2e/</loc>
+    <lastmod>2018-06-28T20:00:55+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.lukasrieder.com/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.lukasrieder.com/</loc>
+    <lastmod>2018-06-28T20:00:55+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.lukasrieder.com/posts/</loc>
+    <lastmod>2018-06-28T20:00:55+02:00</lastmod>
     <priority>0</priority>
   </url>
   
