@@ -16,9 +16,10 @@ I have a number of articles in my pipeline, all waiting to get deployed. Since I
 
 There is sooo much to tell, and I cannot wait to get started.
 
-First, since I am a hacker by heart, I _have completely reset_ my 
+First, since I am a hacker by heart, I _have completely reset_ my publication pipeline. And of course, I am going to dissect every bit and piece of it along the way.
 
-So lean back, get your favorite beverage and dive right into my world.
-I really hope you can enjoy reading my blog.
+Lean back, subscribe, and dive right into my world. I really hope you can enjoy reading my blog.
 
 We are now at `\[master (root-commit) a0d3a2e\] starting fresh`
+
+So much to do, so much to write.
