@@ -395,6 +395,20 @@ blockquote blockquote blockquote blockquote {
   height: 0;
 }
 
+/* Section */
+section {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Site subscribe */
+section.subscribe {
+  margin-top: 70px;
+  margin-bottom: 20px;
+  font-size: 0.8rem;
+}
+
 /* Site footer */
 .site-footer {
   max-width: 900px;
