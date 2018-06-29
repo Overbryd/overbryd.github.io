@@ -1,5 +1,5 @@
 ---
-title: master (root-commit) a0d3a2e
+title: 50a875be3eac870121c72c3e0951d8c8257db1fc Initializing master branch for publication
 date: 2018-06-28 18:00:55 +0000
 ---
 
