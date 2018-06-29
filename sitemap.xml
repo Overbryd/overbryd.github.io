@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.lukasrieder.com/posts/the-tides-of-freelancing/</loc>
+    <lastmod>2018-06-29T15:38:03+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.lukasrieder.com/posts/master-root-commit-a0d3a2e/</loc>
     <lastmod>2018-06-28T18:00:55+00:00</lastmod>
   </url>
@@ -13,19 +18,32 @@
   </url>
   
   <url>
+    <loc>https://www.lukasrieder.com/tags/daway/</loc>
+    <lastmod>2018-06-29T15:38:03+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.lukasrieder.com/tags/freelancing/</loc>
+    <lastmod>2018-06-29T15:38:03+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://www.lukasrieder.com/</loc>
-    <lastmod>2018-06-28T18:00:55+00:00</lastmod>
+    <lastmod>2018-06-29T15:38:03+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.lukasrieder.com/posts/</loc>
-    <lastmod>2018-06-28T18:00:55+00:00</lastmod>
+    <lastmod>2018-06-29T15:38:03+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.lukasrieder.com/tags/</loc>
+    <lastmod>2018-06-29T15:38:03+02:00</lastmod>
     <priority>0</priority>
   </url>
   

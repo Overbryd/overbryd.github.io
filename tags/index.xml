@@ -7,9 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright 2018, Lukas Rieder</copyright>
+    <lastBuildDate>Fri, 29 Jun 2018 15:38:03 +0200</lastBuildDate>
     
 	<atom:link href="https://www.lukasrieder.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Daway</title>
+      <link>https://www.lukasrieder.com/tags/daway/</link>
+      <pubDate>Fri, 29 Jun 2018 15:38:03 +0200</pubDate>
+      
+      <guid>https://www.lukasrieder.com/tags/daway/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Freelancing</title>
+      <link>https://www.lukasrieder.com/tags/freelancing/</link>
+      <pubDate>Fri, 29 Jun 2018 15:38:03 +0200</pubDate>
+      
+      <guid>https://www.lukasrieder.com/tags/freelancing/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>
