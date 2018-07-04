@@ -8,6 +8,8 @@ tags:
 In addition to the answers above, I would like to write up a complete guide on getting `knutin/elli` to work with Elixir.
 The above answers are correct, but I needed some more information to get up and running in my new elixir project.
 
+<!--more-->
+
 1. Implement a handler that has `@behaviour :elli_handler`
 
     This is your router/controller. A bare minimum example version of this looks like this:
