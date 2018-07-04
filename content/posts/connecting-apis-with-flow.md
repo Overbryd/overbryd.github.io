@@ -1,13 +1,16 @@
 ---
 title: "Connecting Apis With Flow"
 date: 2018-01-01T04:20:00+02:00
-draft: true
+tags:
+- Elixir
 ---
 
-# Build an API connector with `Flow`
+Build an API connector with `Flow`.
 
 Say you need to consume events and act upon them. There are numerous services that fit this pattern.
 A recent client of mine wanted just that. In this case it was an API connector, subscribing on events from AMQP, mapping the data to the target API structure and posting to it.
+
+<!--more-->
 
 Given the projects deadline and budget, I was tempted to be a little more defensive and have proper errors explaining when things go wrong. Besides full test coverage, of course.
 
