@@ -1,7 +1,8 @@
 ---
 title: "Elli on Elixir"
 date: 2017-10-18T20:57:32+02:00
-draft: true
+tags:
+- Elixir
 ---
 
 In addition to the answers above, I would like to write up a complete guide on getting `knutin/elli` to work with Elixir.
