@@ -6,11 +6,22 @@
   <title>Connecting Apis With Flow - Lukas Rieder</title>
   <meta property="og:title" content="Connecting Apis With Flow - Lukas Rieder" />
   <meta name="twitter:title" content="Connecting Apis With Flow - Lukas Rieder" />
-  <meta name="description" content="Build an API connector with Flow Say you need to consume events and act upon them. There are numerous services that fit this pattern. A recent client of mine wanted just that. In this case it was an API connector, subscribing on events from AMQP, mapping the data to the target API structure and posting to it.
-Given the projects deadline and budget, I was tempted to be a little more defensive and have proper errors explaining when things go wrong.">
-  <meta property="og:description" content="Build an API connector with Flow Say you need to consume events and act upon them. There are numerous services that fit this pattern. A recent client of mine wanted just that. In this case it was an API connector, subscribing on events from AMQP, mapping the data to the target API structure and posting to it.
-Given the projects deadline and budget, I was tempted to be a little more defensive and have proper errors explaining when things go wrong.">
-  <meta name="twitter:description" content="Build an API connector with Flow Say you need to consume events and act upon them. There are numerous services that fit this pattern. A recent client of mine wanted just that. In this case it was an …">
+  <meta name="description" content="Build an API connector with Flow.
+
+Say you need to consume events and act upon them. There are numerous services that fit this pattern.
+A recent client of mine wanted just that. In this case it was an API connector, subscribing on events from AMQP, mapping the data to the target API structure and posting to it.
+
+">
+  <meta property="og:description" content="Build an API connector with Flow.
+
+Say you need to consume events and act upon them. There are numerous services that fit this pattern.
+A recent client of mine wanted just that. In this case it was an API connector, subscribing on events from AMQP, mapping the data to the target API structure and posting to it.
+
+">
+  <meta name="twitter:description" content="Build an API connector with Flow.
+
+Say you need to consume events and act upon them. There are numerous services that fit this pattern.
+A recent client of mine wanted just that. In this case it was an …">
   <meta name="author" content="Lukas Rieder"/>
   <link rel='shortcut icon' href="https://secure.gravatar.com/avatar/171de85d4d79cb7afe725174fb099137.jpg?s=16" />
   <meta property="og:site_name" content="Lukas Rieder" />
@@ -56,7 +67,7 @@ Given the projects deadline and budget, I was tempted to be a little more defens
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
-<li><a href="#build-an-api-connector-with-flow">Build an API connector with <code>Flow</code></a>
+<li>
 <ul>
 <li><a href="#the-flow-must-go-on">The flow must go on</a>
 <ul>
@@ -68,12 +79,12 @@ Given the projects deadline and budget, I was tempted to be a little more defens
 </ul>
 </nav>
 </aside>
-      
-
-<h1 id="build-an-api-connector-with-flow">Build an API connector with <code>Flow</code></h1>
+      <p>Build an API connector with <code>Flow</code>.</p>
 
 <p>Say you need to consume events and act upon them. There are numerous services that fit this pattern.
 A recent client of mine wanted just that. In this case it was an API connector, subscribing on events from AMQP, mapping the data to the target API structure and posting to it.</p>
+
+<p></p>
 
 <p>Given the projects deadline and budget, I was tempted to be a little more defensive and have proper errors explaining when things go wrong. Besides full test coverage, of course.</p>
 
@@ -241,7 +252,6 @@ In this case the AMQP consumer forwards incoming events to the Dispatcher like t
 
 end
 </code></pre>
-
     </article>
 
     
