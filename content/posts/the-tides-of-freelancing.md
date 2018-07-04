@@ -2,8 +2,8 @@
 title: "The tides of Freelancing"
 date: 2018-06-29T15:38:03+02:00
 tags:
-- freelancing
-- daway
+- Freelancing
+- Daway
 ---
 
 This week, a colleague approached me with a couple of questions about freelancing.
