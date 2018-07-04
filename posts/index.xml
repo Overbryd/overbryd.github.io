@@ -7,10 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright 2018, Lukas Rieder</copyright>
-    <lastBuildDate>Fri, 29 Jun 2018 15:38:03 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 04 Jul 2018 22:25:52 +0200</lastBuildDate>
     
 	<atom:link href="https://www.lukasrieder.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Cloudflare Edge Side Includes</title>
+      <link>https://www.lukasrieder.com/drafts/f1874a1b6e0e1207e40a453ebaebda11fe052e15/</link>
+      <pubDate>Wed, 04 Jul 2018 22:25:52 +0200</pubDate>
+      
+      <guid>https://www.lukasrieder.com/drafts/f1874a1b6e0e1207e40a453ebaebda11fe052e15/</guid>
+      <description>&lt;p&gt;Learn about how my client Titel Media was able to use Cloudflare Workers to implement simple edge side includes.&lt;/p&gt;
+
+&lt;p&gt;The idea is to partially replace the parts of the online magazine &lt;a href=&#34;https://www.highsnobiety.com/&#34;&gt;https://www.highsnobiety.com/&lt;/a&gt;
+with a new, and much more refined frontend implementation.&lt;/p&gt;
+
+&lt;p&gt;In this article, you will get to know the use case, and how I found a powerful application for Cloudflare Workers.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>The tides of Freelancing</title>
