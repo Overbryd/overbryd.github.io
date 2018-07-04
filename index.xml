@@ -58,5 +58,15 @@ All want to be shared, dissected and written up.&lt;/p&gt;
 &lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>Connecting Apis With Flow</title>
+      <link>https://www.lukasrieder.com/posts/connecting-apis-with-flow/</link>
+      <pubDate>Mon, 01 Jan 2018 04:20:00 +0200</pubDate>
+      
+      <guid>https://www.lukasrieder.com/posts/connecting-apis-with-flow/</guid>
+      <description>Build an API connector with Flow Say you need to consume events and act upon them. There are numerous services that fit this pattern. A recent client of mine wanted just that. In this case it was an API connector, subscribing on events from AMQP, mapping the data to the target API structure and posting to it.
+Given the projects deadline and budget, I was tempted to be a little more defensive and have proper errors explaining when things go wrong.</description>
+    </item>
+    
   </channel>
 </rss>
