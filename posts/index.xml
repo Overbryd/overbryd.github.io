@@ -72,5 +72,17 @@ A recent client of mine wanted just that. In this case it was an API connector, 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>Elli on Elixir</title>
+      <link>https://www.lukasrieder.com/posts/elli-on-elixir/</link>
+      <pubDate>Wed, 18 Oct 2017 20:57:32 +0200</pubDate>
+      
+      <guid>https://www.lukasrieder.com/posts/elli-on-elixir/</guid>
+      <description>In addition to the answers above, I would like to write up a complete guide on getting knutin/elli to work with Elixir. The above answers are correct, but I needed some more information to get up and running in my new elixir project.
+ Implement a handler that has @behaviour :elli_handler
+This is your router/controller. A bare minimum example version of this looks like this:
+# lib/elli_handler.ex defmodule ElliHandler do @behaviour :elli_handler alias :elli_request, as: Request def handle(req, args) do handle(Request.</description>
+    </item>
+    
   </channel>
 </rss>

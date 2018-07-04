@@ -63,6 +63,29 @@ A recent client of mine wanted just that. In this case it was an API connector, 
         <div class="article-readmore"><a href="/posts/connecting-apis-with-flow/">Read more...</a></div>
         <div class="article-floatclear"></div>
       </article>
+      <article class="article">
+        <a href="/posts/elli-on-elixir/" class="article-titles">
+          <h2 class="article-title">Elli on Elixir</h2>
+          
+        </a>
+        <ul class="article-meta">
+          <li class="article-meta-date"><time>October 18, 2017</time></li>
+          <li class="article-meta-tags">
+            <a href="/tags/elixir/">
+              <i class="fas fa-tag"></i>
+              Elixir
+            </a>&nbsp;
+          </li>
+        </ul>
+        <div class="article-content">
+          In addition to the answers above, I would like to write up a complete guide on getting knutin/elli to work with Elixir. The above answers are correct, but I needed some more information to get up and running in my new elixir project.
+ Implement a handler that has @behaviour :elli_handler
+This is your router/controller. A bare minimum example version of this looks like this:
+# lib/elli_handler.ex defmodule ElliHandler do @behaviour :elli_handler alias :elli_request, as: Request def handle(req, args) do handle(Request.
+        </div>
+        <div class="article-readmore"><a href="/posts/elli-on-elixir/">Read more...</a></div>
+        <div class="article-floatclear"></div>
+      </article>
     </section>
     
 
