@@ -296,9 +296,21 @@ USB sticks. An external SSD elegantly solves this problem.
         swapoff -a
         shutdown now
 
-## Configure ArchLinux as a VM host with PCI passthrough, CPU pinning and Huge pages support
+## Configure ArchLinux as a VM host
 
-## Before you go online with your Windows VM here are some helpful guides
+With PCI passthrough, CPU pinning and Huge pages support.
+
+## Install your Windows VM
+
+The windows installation itself is almost a self-driving process, but make sure you:
+
+* Disable Cortona
+* Do not get a Microsoft account
+* Install all the virtio drivers right away
+
+## Prepare your Windows VM
+
+Before you go online with your Windows VM here are some helpful guides.
 
 Basically you want to prevent Windows from getting compromised to your best effort,
 and you want to prevent Windows and its derivates from being nosey and calling home.
