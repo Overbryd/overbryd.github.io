@@ -172,6 +172,8 @@ USB sticks. An external SSD elegantly solves this problem.
         lsblk
 
         # Assemble the Intel RST RAID
+        mdadm -C /dev/md/imsm --raid-devices=2 --metdata=imsm /dev/sd[ab]
+        mdadm -C /dev/md/HDD_0 --raid-devices=2 --level=1 /dev/md/imsm
 
         # Create partitions
         gdisk /dev/md/HDD_0
@@ -229,6 +231,9 @@ USB sticks. An external SSD elegantly solves this problem.
         # Chroot into our newly installed system 
         arch-chroot /mnt
 
+        # Store the RAID configuration
+        mdadm --examine --scan >> /etc/mdadm.conf
+
         # Set timezone, hostname...
         ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
         hwclock --systohc --utc
@@ -251,7 +256,7 @@ USB sticks. An external SSD elegantly solves this problem.
 
         # Enable Intel microcode CPU updates (if you use Intel processor, of course)
         pacman -S intel-ucode
-        # Regenerate grub.cfg
+        # Regenerate grub.cfg to pick up the intel-ucode changes
         grub-mkconfig -o /boot/grub/grub.cfg
 
         # Change grub configuration
@@ -359,4 +364,5 @@ Follow these to guides until you satisfy your personal paranioa level.
 * How to install a program from Arch User Repository or AUR https://arashmilani.com/post?id=85
 * How to auto-hotplug usb devices to libvirt VMs https://rolandtapken.de/blog/2011-04/how-auto-hotplug-usb-devices-libvirt-vms-update-1
 * Script to attach and detach USB devices from libvirt virtual machines based on udev rules. https://github.com/olavmrk/usb-libvirt-hotplug
+* Domain XML format https://libvirt.org/formatdomain.html
 
